@@ -74,6 +74,9 @@ public class WeatherActivityViewModel extends ViewModel<WeatherInteractor, Activ
 	}
 
 
+	/* ---- Binding related ---- */
+
+
 	@Bindable
 	public CurrentWeatherEntity getCurrentWeatherEntity()
 	{
