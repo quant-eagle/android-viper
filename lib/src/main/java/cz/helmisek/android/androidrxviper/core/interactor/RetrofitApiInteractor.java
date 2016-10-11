@@ -16,6 +16,7 @@ import rx.schedulers.Schedulers;
 public abstract class RetrofitApiInteractor extends Interactor
 {
 
+	public abstract Retrofit.Builder getRetrofitBuilder();
 	public abstract String getBaseUrl();
 
 
@@ -32,11 +33,12 @@ public abstract class RetrofitApiInteractor extends Interactor
 	public RetrofitApiInteractor(Context context)
 	{
 		super(context);
-		this.mRetrofit = getDefaultRetrofitBuilder().build();
+		this.mRetrofit = getRetrofitBuilder().build();
 	}
 
 
-	private Retrofit.Builder getDefaultRetrofitBuilder()
+
+	public Retrofit.Builder getDefaultRetrofitBuilder()
 	{
 		return new Retrofit.Builder()
 				.client(new OkHttpClient())

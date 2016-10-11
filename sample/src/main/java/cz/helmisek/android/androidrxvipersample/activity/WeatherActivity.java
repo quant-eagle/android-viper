@@ -1,5 +1,8 @@
 package cz.helmisek.android.androidrxvipersample.activity;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+
 import cz.helmisek.android.androidrxviper.ui.BasePresenterActivity;
 import cz.helmisek.android.androidrxvipersample.R;
 import cz.helmisek.android.androidrxvipersample.core.presenter.WeatherActivityPresenter;
@@ -22,4 +25,11 @@ public class WeatherActivity extends BasePresenterActivity<WeatherActivityPresen
 		return new WeatherActivityPresenter(getApplicationContext(), binding);
 	}
 
+
+	@Override
+	protected void onCreate(@Nullable Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setSupportActionBar(getPresenter().getBinding().toolbar);
+	}
 }
