@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+	>
+
+	<data>
+
+		<variable
+			name="presenter"
+			type="cz.helmisek.android.androidrxvipersample.core.presenter.WeatherActivityPresenter"/>
+
+		<variable
+			name="viewmodel"
+			type="cz.helmisek.android.androidrxvipersample.core.viewmodel.WeatherActivityViewModel"/>
+	</data>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<cz.kinst.jakub.view.StatefulLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			app:state="@{viewmodel.state}">
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_gravity="center"
+				android:text="@{String.valueOf(viewmodel.currentWeatherEntity.main.temp)}"/>
+
+		</cz.kinst.jakub.view.StatefulLayout>
+
+	</LinearLayout>
+</layout>
