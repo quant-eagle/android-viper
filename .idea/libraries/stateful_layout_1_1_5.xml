@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="stateful-layout-1.1.5">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/sample/build/intermediates/exploded-aar/cz.kinst.jakub/stateful-layout/1.1.5/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/sample/build/intermediates/exploded-aar/cz.kinst.jakub/stateful-layout/1.1.5/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/cz.kinst.jakub/stateful-layout/1.1.5/14e484111f64d544ab4cc54eeec24a65d38c3ba1/stateful-layout-1.1.5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
