@@ -40,22 +40,12 @@ public class WeatherActivityViewModel extends ViewModel<WeatherInteractor, Activ
 	}
 
 
-	@Override
-	public void subscribe()
+	public void setupWeatherInformation(final String location)
 	{
-		prepareWeatherInformation();
-	}
+		if(state.get() != StatefulLayout.State.PROGRESS)
+			state.set(StatefulLayout.State.PROGRESS);
 
-
-	@Override
-	public void unsubscribe()
-	{
-	}
-
-
-	private void prepareWeatherInformation()
-	{
-		getInteractor().loadCurrentWeather("london").subscribe(new Action1<Response<CurrentWeatherEntity>>()
+		getInteractor().loadCurrentWeather(location).subscribe(new Action1<Response<CurrentWeatherEntity>>()
 		{
 			@Override
 			public void call(Response<CurrentWeatherEntity> currentWeatherEntityResponse)
