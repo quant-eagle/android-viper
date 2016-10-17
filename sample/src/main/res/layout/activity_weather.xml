@@ -8,13 +8,13 @@
 
 		<variable
 			name="presenter"
-			type="cz.helmisek.android.androidrxvipersample.core.presenter.WeatherActivityPresenter"/>
+			type="cz.helmisek.android.androidvipersample.core.presenter.WeatherActivityPresenter"/>
 
 		<variable
 			name="viewmodel"
-			type="cz.helmisek.android.androidrxvipersample.core.viewmodel.WeatherActivityViewModel"/>
+			type="cz.helmisek.android.androidvipersample.core.viewmodel.WeatherActivityViewModel"/>
 
-		<import type="cz.helmisek.android.androidrxvipersample.util.StringUtils"/>
+		<import type="cz.helmisek.android.androidvipersample.util.StringUtils"/>
 
 	</data>
 

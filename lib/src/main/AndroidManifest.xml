@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-		  package="cz.helmisek.android.androidrxviper">
+		  package="cz.helmisek.android.androidviper">
 
 	<application
 		android:allowBackup="true"

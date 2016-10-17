@@ -4,7 +4,7 @@ android {
 	compileSdkVersion 24
 	buildToolsVersion "24.0.1"
 	defaultConfig {
-		applicationId "cz.helmisek.android.androidrxvipersample"
+		applicationId "cz.helmisek.android.androidvipersample"
 		minSdkVersion 16
 		targetSdkVersion 24
 		versionCode 1
@@ -29,6 +29,11 @@ dependencies {
 	})
 	compile 'com.android.support:appcompat-v7:24.2.0'
 	compile 'cz.kinst.jakub:stateful-layout:1.1.5'
+	compile 'io.reactivex:rxandroid:1.2.1'
+	compile 'io.reactivex:rxjava:1.1.6'
+	compile 'com.squareup.retrofit2:retrofit:2.1.0'
+	compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+	compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
 	testCompile 'junit:junit:4.12'
 	compile project(path: ':lib')
 }
