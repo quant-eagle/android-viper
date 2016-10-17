@@ -4,4 +4,4 @@ Android implementation of VIPER architecture inspired by Clean Architecture by R
 
 # Layers
 
-![Alt text](architecture_layers.png)
+![Alt text](/architecture_layers.png)
