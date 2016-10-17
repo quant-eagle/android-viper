@@ -1,6 +1,8 @@
 package cz.helmisek.android.androidvipersample.core.interactor;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import java.io.IOException;
 
@@ -27,6 +29,7 @@ public class WeatherInteractor extends RetrofitApiInteractor
 
 	private static final String UNITS_METRIC = "metric";
 	private static final String QUERY_PARAM_APP_ID = "appid";
+	private static final String PREF_KEY_LAST_WEATHER_LOCATION = "last_weather_location";
 
 
 	@Override
@@ -73,4 +76,16 @@ public class WeatherInteractor extends RetrofitApiInteractor
 	}
 
 
+	public String getLastLocation()
+	{
+		SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+		return mSharedPreferences.getString(PREF_KEY_LAST_WEATHER_LOCATION, "London");
+	}
+
+
+	public void setLastLocation(final String location)
+	{
+		SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+		mSharedPreferences.edit().putString(PREF_KEY_LAST_WEATHER_LOCATION, location).apply();
+	}
 }

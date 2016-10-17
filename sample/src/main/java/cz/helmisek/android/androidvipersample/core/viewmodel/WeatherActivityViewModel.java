@@ -40,6 +40,15 @@ public class WeatherActivityViewModel extends ViewModel<WeatherInteractor, Activ
 	}
 
 
+	@Override
+	public void subscribe()
+	{
+		super.subscribe();
+
+		setupWeatherInformation(getInteractor().getLastLocation());
+	}
+
+
 	public void setupWeatherInformation(final String location)
 	{
 		if(state.get() != StatefulLayout.State.PROGRESS)
@@ -53,6 +62,7 @@ public class WeatherActivityViewModel extends ViewModel<WeatherInteractor, Activ
 				if(currentWeatherEntityResponse.isSuccessful())
 				{
 					setCurrentWeatherEntity(currentWeatherEntityResponse.body());
+					getInteractor().setLastLocation(location);
 					state.set(StatefulLayout.State.CONTENT);
 				}
 				else

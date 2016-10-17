@@ -5,11 +5,11 @@ import android.support.annotation.Nullable;
 
 import cz.helmisek.android.androidviper.ui.BasePresenterActivity;
 import cz.helmisek.android.androidvipersample.R;
-import cz.helmisek.android.androidvipersample.core.presenter.WeatherActivityPresenter;
+import cz.helmisek.android.androidvipersample.core.presenter.WeatherActivityPresenterHandler;
 import cz.helmisek.android.androidvipersample.databinding.ActivityWeatherBinding;
 
 
-public class WeatherActivity extends BasePresenterActivity<WeatherActivityPresenter, ActivityWeatherBinding>
+public class WeatherActivity extends BasePresenterActivity<WeatherActivityPresenterHandler, ActivityWeatherBinding>
 {
 
 	@Override
@@ -20,9 +20,9 @@ public class WeatherActivity extends BasePresenterActivity<WeatherActivityPresen
 
 
 	@Override
-	public WeatherActivityPresenter initPresenter(ActivityWeatherBinding binding)
+	public WeatherActivityPresenterHandler initPresenter(ActivityWeatherBinding binding)
 	{
-		return new WeatherActivityPresenter(getApplicationContext(), binding);
+		return new WeatherActivityPresenterHandler(getApplicationContext(), binding);
 	}
 
 

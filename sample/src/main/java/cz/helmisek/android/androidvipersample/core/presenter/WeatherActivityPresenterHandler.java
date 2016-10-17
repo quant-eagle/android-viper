@@ -3,7 +3,7 @@ package cz.helmisek.android.androidvipersample.core.presenter;
 import android.content.Context;
 
 import cz.helmisek.android.androidviper.core.presenter.Presenter;
-import cz.helmisek.android.androidvipersample.core.behavior.WeatherActivityUI;
+import cz.helmisek.android.androidvipersample.core.behavior.WeatherActivityUIHandler;
 import cz.helmisek.android.androidvipersample.core.viewmodel.WeatherActivityViewModel;
 import cz.helmisek.android.androidvipersample.databinding.ActivityWeatherBinding;
 
@@ -12,10 +12,10 @@ import cz.helmisek.android.androidvipersample.databinding.ActivityWeatherBinding
  * Created by Jirka Helmich on 11.10.16.
  */
 
-public class WeatherActivityPresenter extends Presenter<WeatherActivityViewModel, ActivityWeatherBinding> implements WeatherActivityUI
+public class WeatherActivityPresenterHandler extends Presenter<WeatherActivityViewModel, ActivityWeatherBinding> implements WeatherActivityUIHandler
 {
 
-	public WeatherActivityPresenter(Context context, ActivityWeatherBinding binding)
+	public WeatherActivityPresenterHandler(Context context, ActivityWeatherBinding binding)
 	{
 		super(context, binding);
 	}
