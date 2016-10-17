@@ -58,18 +58,6 @@
 					android:textSize="21sp"
 					tools:text="London"/>
 
-				<TextView
-					android:id="@+id/temperatureTextView"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_alignParentTop="true"
-					android:layout_centerHorizontal="true"
-					android:layout_marginTop="72dp"
-					android:text='@{StringUtils.parseTemperature(viewmodel.currentWeatherEntity.main.temp)}'
-					android:textColor="@android:color/white"
-					android:textSize="48sp"
-					tools:text="24C"/>
-
 				<Button
 					android:id="@+id/button"
 					android:layout_width="wrap_content"
@@ -79,6 +67,18 @@
 					android:layout_alignParentTop="true"
 					android:onClick="@{() -> presenter.onLocationSubmit()}"
 					android:text="@string/search"/>
+
+				<TextView
+					android:id="@+id/temperatureTextView"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@+id/weatherLocation"
+					android:layout_centerHorizontal="true"
+					android:layout_marginTop="@dimen/activity_vertical_margin"
+					android:text='@{StringUtils.parseTemperature(viewmodel.currentWeatherEntity.main.temp)}'
+					android:textColor="@android:color/white"
+					android:textSize="48sp"
+					tools:text="24C"/>
 			</RelativeLayout>
 
 		</cz.kinst.jakub.view.StatefulLayout>
