@@ -1,4 +1,4 @@
-package cz.helmisek.android.androidvipersample.core.behavior;
+package cz.helmisek.android.androidvipersample.core.viewinteractor;
 
 /**
  * Created by Jirka Helmich on 17.10.16.

@@ -8,7 +8,7 @@
 
 		<variable
 			name="presenter"
-			type="cz.helmisek.android.androidvipersample.core.presenter.WeatherActivityPresenterHandler"/>
+			type="cz.helmisek.android.androidvipersample.core.presenter.WeatherActivityPresenter"/>
 
 		<variable
 			name="viewmodel"

@@ -51,6 +51,8 @@ public class WeatherActivityViewModel extends ViewModel<WeatherInteractor, Activ
 
 	public void setupWeatherInformation(final String location)
 	{
+		getBinding().weatherLocation.setText(location);
+
 		if(state.get() != StatefulLayout.State.PROGRESS)
 			state.set(StatefulLayout.State.PROGRESS);
 

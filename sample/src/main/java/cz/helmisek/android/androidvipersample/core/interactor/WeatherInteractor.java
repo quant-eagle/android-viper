@@ -31,6 +31,8 @@ public class WeatherInteractor extends RetrofitApiInteractor
 	private static final String QUERY_PARAM_APP_ID = "appid";
 	private static final String PREF_KEY_LAST_WEATHER_LOCATION = "last_weather_location";
 
+	private Context mContext;
+
 
 	@Override
 	public Retrofit.Builder getRetrofitBuilder()
@@ -64,7 +66,8 @@ public class WeatherInteractor extends RetrofitApiInteractor
 
 	public WeatherInteractor(Context context)
 	{
-		super(context);
+		super();
+		this.mContext = context;
 	}
 
 
@@ -78,14 +81,14 @@ public class WeatherInteractor extends RetrofitApiInteractor
 
 	public String getLastLocation()
 	{
-		SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+		SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
 		return mSharedPreferences.getString(PREF_KEY_LAST_WEATHER_LOCATION, "London");
 	}
 
 
 	public void setLastLocation(final String location)
 	{
-		SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+		SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
 		mSharedPreferences.edit().putString(PREF_KEY_LAST_WEATHER_LOCATION, location).apply();
 	}
 }

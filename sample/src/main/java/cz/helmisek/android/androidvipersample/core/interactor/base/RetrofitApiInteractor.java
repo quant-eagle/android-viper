@@ -1,7 +1,5 @@
 package cz.helmisek.android.androidvipersample.core.interactor.base;
 
-import android.content.Context;
-
 import cz.helmisek.android.androidviper.core.interactor.Interactor;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -24,16 +22,14 @@ public abstract class RetrofitApiInteractor extends Interactor
 	private Retrofit mRetrofit;
 
 
-	public RetrofitApiInteractor(Context context, Retrofit retrofit)
+	public RetrofitApiInteractor(Retrofit retrofit)
 	{
-		super(context);
 		this.mRetrofit = retrofit;
 	}
 
 
-	public RetrofitApiInteractor(Context context)
+	public RetrofitApiInteractor()
 	{
-		super(context);
 		this.mRetrofit = getRetrofitBuilder().build();
 	}
 
