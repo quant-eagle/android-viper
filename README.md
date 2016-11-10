@@ -5,3 +5,8 @@ Android implementation of VIPER architecture inspired by Clean Architecture by R
 # Layers
 
 ![Alt text](/architecture_layers.jpg)
+
+
+# Authors
+
+Jiří Helmich & Josef Korbel
