@@ -3,6 +3,7 @@ package cz.helmisek.android.androidvipersample.core.viewmodel;
 import android.content.Context;
 import android.databinding.Bindable;
 import android.databinding.ObservableField;
+import android.util.Log;
 
 import com.android.databinding.library.baseAdapters.BR;
 
@@ -46,11 +47,14 @@ public class WeatherActivityViewModel extends ViewModel<WeatherInteractor, Activ
 		super.subscribe();
 
 		setupWeatherInformation(getInteractor().getLastLocation());
+
 	}
 
 
 	public void setupWeatherInformation(final String location)
 	{
+		Log.v("Weather download", "In progress");
+
 		getBinding().weatherLocation.setText(location);
 
 		if(state.get() != StatefulLayout.State.PROGRESS)

@@ -16,6 +16,7 @@ public abstract class ViewModel<I extends Interactor, VB extends ViewDataBinding
 	private LayoutInflater mLayoutInflater;
 	private VB mBinding;
 	private I mInteractor;
+	private boolean firstAttachment = true;
 
 
 	public ViewModel(Context context)
@@ -51,6 +52,12 @@ public abstract class ViewModel<I extends Interactor, VB extends ViewDataBinding
 	}
 
 
+	public void setContext(Context context)
+	{
+		this.mContext = context;
+	}
+
+
 	public LayoutInflater getLayoutInflater()
 	{
 		return mLayoutInflater;
@@ -60,11 +67,22 @@ public abstract class ViewModel<I extends Interactor, VB extends ViewDataBinding
 	@Override
 	public void subscribe()
 	{
+
 	}
 
 
 	@Override
 	public void unsubscribe()
 	{
+		if(firstAttachment)
+		{
+			firstAttachment = false;
+		}
+	}
+
+
+	public boolean isFirstAttachment()
+	{
+		return firstAttachment;
 	}
 }

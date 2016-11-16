@@ -32,54 +32,56 @@
 			app:title="@string/app_name"
 			app:titleTextColor="@android:color/white"/>
 
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="@color/colorPrimary">
+
+			<EditText
+				android:id="@+id/weatherLocation"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_alignBottom="@+id/button"
+				android:layout_alignParentTop="true"
+				android:layout_toLeftOf="@+id/button"
+				android:layout_toStartOf="@+id/button"
+				android:background="#FFF"
+				android:inputType="textCapWords"
+				android:paddingEnd="@dimen/activity_horizontal_margin"
+				android:paddingStart="@dimen/activity_horizontal_margin"
+				android:textColor="#000"
+				android:textSize="21sp"
+				tools:text="London"/>
+
+			<Button
+				android:id="@+id/button"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignParentEnd="true"
+				android:layout_alignParentRight="true"
+				android:layout_alignParentTop="true"
+				android:onClick="@{() -> presenter.onLocationSubmit()}"
+				android:text="@string/search"/>
+
+			<TextView
+				android:id="@+id/temperatureTextView"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_below="@+id/weatherLocation"
+				android:layout_centerHorizontal="true"
+				android:layout_marginTop="@dimen/activity_vertical_margin"
+				android:text='@{StringUtils.parseTemperature(viewmodel.currentWeatherEntity.main.temp)}'
+				android:textColor="@android:color/white"
+				android:textSize="48sp"
+				tools:text="24C"/>
+		</RelativeLayout>
+
 		<cz.kinst.jakub.view.StatefulLayout
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			app:state="@{viewmodel.state}">
 
-			<RelativeLayout
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:background="@color/colorPrimary">
 
-				<EditText
-					android:id="@+id/weatherLocation"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:layout_alignBottom="@+id/button"
-					android:layout_alignParentTop="true"
-					android:layout_toLeftOf="@+id/button"
-					android:layout_toStartOf="@+id/button"
-					android:background="#FFF"
-					android:inputType="textCapWords"
-					android:paddingEnd="@dimen/activity_horizontal_margin"
-					android:paddingStart="@dimen/activity_horizontal_margin"
-					android:textColor="#000"
-					android:textSize="21sp"
-					tools:text="London"/>
-
-				<Button
-					android:id="@+id/button"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_alignParentEnd="true"
-					android:layout_alignParentRight="true"
-					android:layout_alignParentTop="true"
-					android:onClick="@{() -> presenter.onLocationSubmit()}"
-					android:text="@string/search"/>
-
-				<TextView
-					android:id="@+id/temperatureTextView"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_below="@+id/weatherLocation"
-					android:layout_centerHorizontal="true"
-					android:layout_marginTop="@dimen/activity_vertical_margin"
-					android:text='@{StringUtils.parseTemperature(viewmodel.currentWeatherEntity.main.temp)}'
-					android:textColor="@android:color/white"
-					android:textSize="48sp"
-					tools:text="24C"/>
-			</RelativeLayout>
 
 		</cz.kinst.jakub.view.StatefulLayout>
 

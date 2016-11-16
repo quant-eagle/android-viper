@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import cz.helmisek.android.androidviper.core.contract.ViewPresenterDefaultContract;
 import cz.helmisek.android.androidviper.core.presenter.Presenter;
+import cz.helmisek.android.androidviper.core.provider.PresenterProvider;
 
 
 public abstract class BasePresenterActivity<P extends Presenter, VB extends ViewDataBinding> extends AppCompatActivity implements ViewPresenterDefaultContract<P, VB>
@@ -24,7 +25,15 @@ public abstract class BasePresenterActivity<P extends Presenter, VB extends View
 	{
 		super.onCreate(savedInstanceState);
 		VB binding = DataBindingUtil.setContentView(this, getLayoutId());
-		this.mPresenter = initPresenter(binding);
+		if(savedInstanceState == null)
+		{
+			this.mPresenter = initPresenter(binding);
+		}
+		else
+		{
+			this.mPresenter = (P) PresenterProvider.getInstance().getPresenter("JIRKA");
+			this.mPresenter.revive(binding, getApplicationContext());
+		}
 	}
 
 
@@ -48,5 +57,20 @@ public abstract class BasePresenterActivity<P extends Presenter, VB extends View
 	{
 		super.onPause();
 		getPresenter().onPause();
+	}
+
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState)
+	{
+		super.onSaveInstanceState(outState);
+		PresenterProvider.getInstance().addPresenter("JIRKA", this.mPresenter);
+	}
+
+
+	@Override
+	protected void onDestroy()
+	{
+		super.onDestroy();
 	}
 }

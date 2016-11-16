@@ -2,12 +2,15 @@ package cz.helmisek.android.androidviper.core.presenter;
 
 import android.content.Context;
 import android.databinding.ViewDataBinding;
+import android.os.Bundle;
+
+import java.io.Serializable;
 
 import cz.helmisek.android.androidviper.core.contract.PresenterDefaultContract;
 import cz.helmisek.android.androidviper.core.viewmodel.ViewModel;
 
 
-public abstract class Presenter<VM extends ViewModel, VB extends ViewDataBinding> implements PresenterDefaultContract<VM>
+public abstract class Presenter<VM extends ViewModel, VB extends ViewDataBinding> implements PresenterDefaultContract<VM>, Serializable
 {
 	private VM mViewModel;
 	private Context mContext;
@@ -58,6 +61,14 @@ public abstract class Presenter<VM extends ViewModel, VB extends ViewDataBinding
 	public VB getBinding()
 	{
 		return (VB) this.mViewModel.getBinding();
+	}
+
+
+	public void revive(VB binding, Context context)
+	{
+		this.mViewModel.setBinding(binding);
+		this.mViewModel.setContext(context);
+		this.mContext = context;
 	}
 
 }
