@@ -6,6 +6,9 @@ import cz.helmisek.android.androidviper.core.interactor.Interactor;
 /**
  * Behavior description for {@link cz.helmisek.android.androidviper.core.viewmodel.ViewModel}
  * which should always implement it.
+ *
+ * @param <I> any descendant of {@link Interactor} class to use with
+ *           this {@link cz.helmisek.android.androidviper.core.viewmodel.ViewModel} instance.
  */
 public interface ViewModelDefaultContract<I extends Interactor>
 {
