@@ -2,46 +2,85 @@ package cz.helmisek.android.androidviper.core.presenter;
 
 import android.content.Context;
 import android.databinding.ViewDataBinding;
-import android.os.Bundle;
 
 import java.io.Serializable;
 
 import cz.helmisek.android.androidviper.core.contract.PresenterDefaultContract;
+import cz.helmisek.android.androidviper.core.util.ViewWrapper;
 import cz.helmisek.android.androidviper.core.viewmodel.ViewModel;
 
 
 public abstract class Presenter<VM extends ViewModel, VB extends ViewDataBinding> implements PresenterDefaultContract<VM>, Serializable
 {
 	private VM mViewModel;
-	private Context mContext;
+	private ViewWrapper<VB, ? extends Presenter> mWrapper;
+	private boolean firstAttachment = true;
 
 
-	public Presenter(Context context, VB binding)
+	public void onPresenterCreated()
 	{
-		this.mContext = context;
 		this.mViewModel = initViewModel();
-		this.mViewModel.setBinding(binding);
-
-		init();
+		this.mViewModel.bind(mWrapper);
+		this.mViewModel.onViewModelCreated();
 	}
 
 
-	public void init()
+	public void onPresenterAttached(boolean firstAttachment)
 	{
+		this.mViewModel.subscribe(firstAttachment);
+	}
+
+
+	public void onPresenterDetached(boolean wasDestroyed)
+	{
+	}
+
+
+	public void onPresenterDestroyed()
+	{
+		this.mViewModel.unsubscribe(true);
 	}
 
 
 	@Override
 	public void onResume()
 	{
-		this.mViewModel.subscribe();
+		this.mViewModel.subscribe(this.firstAttachment);
 	}
 
 
 	@Override
 	public void onPause()
 	{
-		this.mViewModel.unsubscribe();
+		unsubscribe();
+	}
+
+
+	private void unsubscribe()
+	{
+		if(firstAttachment)
+		{
+			firstAttachment = false;
+		}
+		this.mViewModel.unsubscribe(false);
+	}
+
+
+	public boolean isFirstAttachment()
+	{
+		return firstAttachment;
+	}
+
+
+	public Context getContext()
+	{
+		return mWrapper.getContext();
+	}
+
+
+	public VB getBinding()
+	{
+		return mWrapper.getBinding();
 	}
 
 
@@ -52,23 +91,12 @@ public abstract class Presenter<VM extends ViewModel, VB extends ViewDataBinding
 	}
 
 
-	public Context getContext()
+	public void bind(ViewWrapper<VB, ? extends Presenter> viewWrapper)
 	{
-		return this.mContext;
-	}
+		this.mWrapper = viewWrapper;
 
-
-	public VB getBinding()
-	{
-		return (VB) this.mViewModel.getBinding();
-	}
-
-
-	public void revive(VB binding, Context context)
-	{
-		this.mViewModel.setBinding(binding);
-		this.mViewModel.setContext(context);
-		this.mContext = context;
+		if(this.mViewModel != null)
+			this.mViewModel.bind(viewWrapper);
 	}
 
 }

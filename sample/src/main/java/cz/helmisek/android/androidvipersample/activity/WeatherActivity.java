@@ -3,6 +3,8 @@ package cz.helmisek.android.androidvipersample.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import cz.helmisek.android.androidviper.BR;
+import cz.helmisek.android.androidviper.core.util.ViperConfig;
 import cz.helmisek.android.androidviper.ui.BasePresenterActivity;
 import cz.helmisek.android.androidvipersample.R;
 import cz.helmisek.android.androidvipersample.core.presenter.WeatherActivityPresenter;
@@ -20,9 +22,16 @@ public class WeatherActivity extends BasePresenterActivity<WeatherActivityPresen
 
 
 	@Override
-	public WeatherActivityPresenter initPresenter(ActivityWeatherBinding binding)
+	protected ViperConfig setupViperConfig()
 	{
-		return new WeatherActivityPresenter(getApplicationContext(), binding);
+		return new ViperConfig(BR.presenter, BR.viewmodel);
+	}
+
+
+	@Override
+	public WeatherActivityPresenter initPresenter()
+	{
+		return new WeatherActivityPresenter();
 	}
 
 
@@ -30,6 +39,6 @@ public class WeatherActivity extends BasePresenterActivity<WeatherActivityPresen
 	protected void onCreate(@Nullable Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setSupportActionBar(getPresenter().getBinding().toolbar);
+		setSupportActionBar(getBinding().toolbar);
 	}
 }

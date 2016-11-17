@@ -3,40 +3,29 @@ package cz.helmisek.android.androidviper.core.viewmodel;
 import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.ViewDataBinding;
-import android.view.LayoutInflater;
 
 import cz.helmisek.android.androidviper.core.contract.ViewModelDefaultContract;
 import cz.helmisek.android.androidviper.core.interactor.Interactor;
+import cz.helmisek.android.androidviper.core.presenter.Presenter;
+import cz.helmisek.android.androidviper.core.util.ViewWrapper;
 
 
 public abstract class ViewModel<I extends Interactor, VB extends ViewDataBinding> extends BaseObservable implements ViewModelDefaultContract<I>
 {
 
-	private Context mContext;
-	private LayoutInflater mLayoutInflater;
-	private VB mBinding;
+	private ViewWrapper<VB, ? extends Presenter> mWrapper;
 	private I mInteractor;
-	private boolean firstAttachment = true;
 
 
-	public ViewModel(Context context)
+	public void bind(ViewWrapper<VB, ? extends Presenter> viewWrapper)
 	{
-		this.mContext = context;
-		this.mLayoutInflater = LayoutInflater.from(context);
-		this.mInteractor = initInteractor(context);
-	}
-
-
-	public void setBinding(VB binding)
-	{
-		this.mBinding = binding;
+		this.mWrapper = viewWrapper;
 	}
 
 
 	public VB getBinding()
 	{
-		if(this.mBinding == null) throw new RuntimeException("Binding is not assigned");
-		return this.mBinding;
+		return mWrapper.getBinding();
 	}
 
 
@@ -48,41 +37,25 @@ public abstract class ViewModel<I extends Interactor, VB extends ViewDataBinding
 
 	public Context getContext()
 	{
-		return mContext;
-	}
-
-
-	public void setContext(Context context)
-	{
-		this.mContext = context;
-	}
-
-
-	public LayoutInflater getLayoutInflater()
-	{
-		return mLayoutInflater;
+		return mWrapper.getContext();
 	}
 
 
 	@Override
-	public void subscribe()
+	public void subscribe(boolean firstAttachment)
 	{
-
 	}
 
 
 	@Override
-	public void unsubscribe()
+	public void unsubscribe(boolean wasDestroyed)
 	{
-		if(firstAttachment)
-		{
-			firstAttachment = false;
-		}
 	}
 
 
-	public boolean isFirstAttachment()
+	@Override
+	public void onViewModelCreated()
 	{
-		return firstAttachment;
+		mInteractor = initInteractor();
 	}
 }

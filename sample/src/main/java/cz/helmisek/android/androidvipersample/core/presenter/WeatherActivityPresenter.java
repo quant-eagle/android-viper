@@ -1,7 +1,5 @@
 package cz.helmisek.android.androidvipersample.core.presenter;
 
-import android.content.Context;
-
 import cz.helmisek.android.androidviper.core.presenter.Presenter;
 import cz.helmisek.android.androidvipersample.core.viewinteractor.WeatherActivityViewInteractor;
 import cz.helmisek.android.androidvipersample.core.viewmodel.WeatherActivityViewModel;
@@ -15,23 +13,17 @@ import cz.helmisek.android.androidvipersample.databinding.ActivityWeatherBinding
 public class WeatherActivityPresenter extends Presenter<WeatherActivityViewModel, ActivityWeatherBinding> implements WeatherActivityViewInteractor
 {
 
-	public WeatherActivityPresenter(Context context, ActivityWeatherBinding binding)
-	{
-		super(context, binding);
-	}
-
-
 	@Override
 	public WeatherActivityViewModel initViewModel()
 	{
-		return new WeatherActivityViewModel(getContext());
+		return new WeatherActivityViewModel();
 	}
 
 
 	@Override
-	public void init()
+	public void onPresenterCreated()
 	{
-		super.init();
+		super.onPresenterCreated();
 
 		getBinding().setPresenter(this);
 		getBinding().setViewmodel(getViewModel());

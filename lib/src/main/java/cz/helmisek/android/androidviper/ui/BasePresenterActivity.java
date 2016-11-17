@@ -1,6 +1,7 @@
 package cz.helmisek.android.androidviper.ui;
 
-import android.databinding.DataBindingUtil;
+import android.app.Activity;
+import android.content.Context;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,39 +9,34 @@ import android.support.v7.app.AppCompatActivity;
 
 import cz.helmisek.android.androidviper.core.contract.ViewPresenterDefaultContract;
 import cz.helmisek.android.androidviper.core.presenter.Presenter;
-import cz.helmisek.android.androidviper.core.provider.PresenterProvider;
+import cz.helmisek.android.androidviper.core.util.ViewWrapper;
+import cz.helmisek.android.androidviper.core.util.ViperConfig;
+import cz.helmisek.android.androidviper.core.util.ViperHelper;
 
 
-public abstract class BasePresenterActivity<P extends Presenter, VB extends ViewDataBinding> extends AppCompatActivity implements ViewPresenterDefaultContract<P, VB>
+public abstract class BasePresenterActivity<P extends Presenter, VB extends ViewDataBinding> extends AppCompatActivity
+		implements ViewPresenterDefaultContract<P>, ViewWrapper<VB, P>
 {
 
-	private P mPresenter;
+	private final ViperHelper<VB, P> mViperHelper = new ViperHelper<>();
 
 
-	public abstract int getLayoutId();
+	protected abstract ViperConfig setupViperConfig();
 
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		VB binding = DataBindingUtil.setContentView(this, getLayoutId());
-		if(savedInstanceState == null)
-		{
-			this.mPresenter = initPresenter(binding);
-		}
-		else
-		{
-			this.mPresenter = (P) PresenterProvider.getInstance().getPresenter("JIRKA");
-			this.mPresenter.revive(binding, getApplicationContext());
-		}
+		this.mViperHelper.setConfig(setupViperConfig());
+		this.mViperHelper.onCreate(this, this, savedInstanceState);
 	}
 
 
 	@Override
 	public P getPresenter()
 	{
-		return mPresenter;
+		return this.mViperHelper.getPresenter();
 	}
 
 
@@ -48,7 +44,7 @@ public abstract class BasePresenterActivity<P extends Presenter, VB extends View
 	protected void onResume()
 	{
 		super.onResume();
-		getPresenter().onResume();
+		mViperHelper.onResume();
 	}
 
 
@@ -56,7 +52,28 @@ public abstract class BasePresenterActivity<P extends Presenter, VB extends View
 	protected void onPause()
 	{
 		super.onPause();
-		getPresenter().onPause();
+		mViperHelper.onPause();
+	}
+
+
+	@Override
+	public Context getContext()
+	{
+		return getActivity();
+	}
+
+
+	@Override
+	public Activity getActivity()
+	{
+		return this;
+	}
+
+
+	@Override
+	public VB getBinding()
+	{
+		return this.mViperHelper.getBinding();
 	}
 
 
@@ -64,7 +81,7 @@ public abstract class BasePresenterActivity<P extends Presenter, VB extends View
 	protected void onSaveInstanceState(Bundle outState)
 	{
 		super.onSaveInstanceState(outState);
-		PresenterProvider.getInstance().addPresenter("JIRKA", this.mPresenter);
+		this.mViperHelper.onSaveInstanceState(outState);
 	}
 
 
@@ -72,5 +89,6 @@ public abstract class BasePresenterActivity<P extends Presenter, VB extends View
 	protected void onDestroy()
 	{
 		super.onDestroy();
+		mViperHelper.onDestroy(this);
 	}
 }

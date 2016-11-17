@@ -1,4 +1,4 @@
-package cz.helmisek.android.androidviper.core.provider;
+package cz.helmisek.android.androidviper.core.util;
 
 import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
@@ -6,30 +6,27 @@ import android.support.annotation.Nullable;
 
 import java.util.HashMap;
 
+import cz.helmisek.android.androidviper.core.contract.ViewPresenterDefaultContract;
 import cz.helmisek.android.androidviper.core.presenter.Presenter;
 import cz.helmisek.android.androidviper.core.viewmodel.ViewModel;
 
 
-/**
- * Created by Jirka Helmich on 15.11.16.
- */
-
-public class PresenterProvider
+public class ViperProvider
 {
-	private static PresenterProvider sInstance;
+	private static ViperProvider sInstance;
 
 	private final HashMap<String, Presenter<? extends ViewModel, ? extends ViewDataBinding>> mPresentersMap;
 
 
-	private PresenterProvider()
+	private ViperProvider()
 	{
 		this.mPresentersMap = new HashMap<>();
 	}
 
 
-	public static PresenterProvider getInstance()
+	public static ViperProvider getInstance()
 	{
-		if(sInstance == null) sInstance = new PresenterProvider();
+		if(sInstance == null) sInstance = new ViperProvider();
 		return sInstance;
 	}
 
@@ -47,13 +44,13 @@ public class PresenterProvider
 
 
 	@Nullable
-	public synchronized <VM extends ViewModel, VB extends ViewDataBinding> Presenter<VM, VB> getPresenter(@NonNull String presenterId)
+	public synchronized <VM extends ViewModel, VB extends ViewDataBinding> Presenter<VM, VB> getPresenter(@NonNull String presenterId, ViewPresenterDefaultContract contract, VB binding)
 	{
 		Presenter<VM, VB> instance = (Presenter<VM, VB>) this.mPresentersMap.get(presenterId);
 		if(instance != null)
 		{
 			return instance;
 		}
-		return null;
+		return contract.initPresenter();
 	}
 }

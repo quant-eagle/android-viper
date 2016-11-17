@@ -28,26 +28,19 @@ public class WeatherActivityViewModel extends ViewModel<WeatherInteractor, Activ
 	private CurrentWeatherEntity mCurrentWeatherEntity;
 
 
-	public WeatherActivityViewModel(Context context)
+	@Override
+	public WeatherInteractor initInteractor()
 	{
-		super(context);
+		return new WeatherInteractor(getContext());
 	}
 
 
 	@Override
-	public WeatherInteractor initInteractor(Context context)
+	public void onViewModelCreated()
 	{
-		return new WeatherInteractor(context);
-	}
-
-
-	@Override
-	public void subscribe()
-	{
-		super.subscribe();
+		super.onViewModelCreated();
 
 		setupWeatherInformation(getInteractor().getLastLocation());
-
 	}
 
 

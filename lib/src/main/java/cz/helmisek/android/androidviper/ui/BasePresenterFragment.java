@@ -13,7 +13,7 @@ import cz.helmisek.android.androidviper.core.contract.ViewPresenterDefaultContra
 import cz.helmisek.android.androidviper.core.presenter.Presenter;
 
 
-public abstract class BasePresenterFragment<P extends Presenter, VB extends ViewDataBinding> extends Fragment implements ViewPresenterDefaultContract<P, VB>
+public abstract class BasePresenterFragment<P extends Presenter, VB extends ViewDataBinding> extends Fragment implements ViewPresenterDefaultContract<P>
 {
 
 	private P mPresenter;
@@ -28,7 +28,7 @@ public abstract class BasePresenterFragment<P extends Presenter, VB extends View
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{
 		VB binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
-		this.mPresenter = initPresenter(binding);
+		this.mPresenter = initPresenter();
 		this.mRootView = binding.getRoot();
 		return this.mRootView;
 	}
@@ -38,7 +38,6 @@ public abstract class BasePresenterFragment<P extends Presenter, VB extends View
 	public void onPause()
 	{
 		super.onPause();
-		getPresenter().onPause();
 	}
 
 
@@ -46,15 +45,8 @@ public abstract class BasePresenterFragment<P extends Presenter, VB extends View
 	public void onResume()
 	{
 		super.onResume();
-		getPresenter().onResume();
 	}
 
-
-	@Override
-	public P getPresenter()
-	{
-		return this.mPresenter;
-	}
 
 
 	public View getRootView()

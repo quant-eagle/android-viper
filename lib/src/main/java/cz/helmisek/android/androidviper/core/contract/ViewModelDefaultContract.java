@@ -1,7 +1,5 @@
 package cz.helmisek.android.androidviper.core.contract;
 
-import android.content.Context;
-
 import cz.helmisek.android.androidviper.core.interactor.Interactor;
 
 
@@ -11,8 +9,9 @@ import cz.helmisek.android.androidviper.core.interactor.Interactor;
 
 public interface ViewModelDefaultContract<I extends Interactor>
 {
-	void subscribe();
-	void unsubscribe();
+	void onViewModelCreated();
+	void subscribe(boolean firstAttachment);
+	void unsubscribe(boolean wasDestroyed);
 
-	I initInteractor(Context context);
+	I initInteractor();
 }
