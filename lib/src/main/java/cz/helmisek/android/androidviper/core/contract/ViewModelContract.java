@@ -10,7 +10,7 @@ import cz.helmisek.android.androidviper.core.interactor.Interactor;
  * @param <I> any descendant of {@link Interactor} class to use with
  *           this {@link cz.helmisek.android.androidviper.core.viewmodel.ViewModel} instance.
  */
-public interface ViewModelDefaultContract<I extends Interactor>
+public interface ViewModelContract<I extends Interactor>
 {
 	/**
 	 * Should be called only once on fresh

@@ -9,13 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import cz.helmisek.android.androidviper.core.contract.ViewPresenterDefaultContract;
+import cz.helmisek.android.androidviper.core.contract.ViewPresenterContract;
 import cz.helmisek.android.androidviper.core.presenter.Presenter;
 import cz.helmisek.android.androidviper.core.util.ViewWrapper;
 import cz.helmisek.android.androidviper.core.util.ViperHelper;
 
 
-public abstract class BasePresenterFragment<P extends Presenter, VB extends ViewDataBinding> extends Fragment implements ViewPresenterDefaultContract<P>, ViewWrapper<VB, P>
+public abstract class BasePresenterFragment<P extends Presenter, VB extends ViewDataBinding> extends Fragment implements ViewPresenterContract<P>, ViewWrapper<VB, P>
 {
 	private final ViperHelper<VB, P> mViperHelper = new ViperHelper<>();
 

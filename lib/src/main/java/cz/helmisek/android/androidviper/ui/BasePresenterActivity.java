@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import cz.helmisek.android.androidviper.core.contract.ViewPresenterDefaultContract;
+import cz.helmisek.android.androidviper.core.contract.ViewPresenterContract;
 import cz.helmisek.android.androidviper.core.presenter.Presenter;
 import cz.helmisek.android.androidviper.core.util.ViewWrapper;
 import cz.helmisek.android.androidviper.core.util.ViperConfig;
@@ -15,7 +15,7 @@ import cz.helmisek.android.androidviper.core.util.ViperHelper;
 
 
 public abstract class BasePresenterActivity<P extends Presenter, VB extends ViewDataBinding> extends AppCompatActivity
-		implements ViewPresenterDefaultContract<P>, ViewWrapper<VB, P>
+		implements ViewPresenterContract<P>, ViewWrapper<VB, P>
 {
 
 	private final ViperHelper<VB, P> mViperHelper = new ViperHelper<>();

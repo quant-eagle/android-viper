@@ -8,7 +8,7 @@ import cz.helmisek.android.androidviper.core.presenter.Presenter;
  *
  * @param <P> any descendant of {@link Presenter} to use.
  */
-public interface ViewPresenterDefaultContract<P extends Presenter>
+public interface ViewPresenterContract<P extends Presenter>
 {
 	/**
 	 * Initialize new instance of {@link Presenter} to use with any view, which should use {@link Presenter}.

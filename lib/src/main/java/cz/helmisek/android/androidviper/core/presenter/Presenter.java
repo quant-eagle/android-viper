@@ -5,12 +5,12 @@ import android.databinding.ViewDataBinding;
 
 import java.io.Serializable;
 
-import cz.helmisek.android.androidviper.core.contract.PresenterDefaultContract;
+import cz.helmisek.android.androidviper.core.contract.PresenterContract;
 import cz.helmisek.android.androidviper.core.util.ViewWrapper;
 import cz.helmisek.android.androidviper.core.viewmodel.ViewModel;
 
 
-public abstract class Presenter<VM extends ViewModel, VB extends ViewDataBinding> implements PresenterDefaultContract<VM>, Serializable
+public abstract class Presenter<VM extends ViewModel, VB extends ViewDataBinding> implements PresenterContract<VM>, Serializable
 {
 	private VM mViewModel;
 	private ViewWrapper<VB, ? extends Presenter> mWrapper;

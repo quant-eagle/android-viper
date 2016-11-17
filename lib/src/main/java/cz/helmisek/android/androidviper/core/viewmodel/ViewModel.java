@@ -4,13 +4,13 @@ import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.ViewDataBinding;
 
-import cz.helmisek.android.androidviper.core.contract.ViewModelDefaultContract;
+import cz.helmisek.android.androidviper.core.contract.ViewModelContract;
 import cz.helmisek.android.androidviper.core.interactor.Interactor;
 import cz.helmisek.android.androidviper.core.presenter.Presenter;
 import cz.helmisek.android.androidviper.core.util.ViewWrapper;
 
 
-public abstract class ViewModel<I extends Interactor, VB extends ViewDataBinding> extends BaseObservable implements ViewModelDefaultContract<I>
+public abstract class ViewModel<I extends Interactor, VB extends ViewDataBinding> extends BaseObservable implements ViewModelContract<I>
 {
 
 	private ViewWrapper<VB, ? extends Presenter> mWrapper;

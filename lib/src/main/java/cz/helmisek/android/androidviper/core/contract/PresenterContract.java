@@ -7,7 +7,7 @@ import cz.helmisek.android.androidviper.core.viewmodel.ViewModel;
  *
  * @param <VM> Any descendant of {@link ViewModel} to use with this instance of {@link cz.helmisek.android.androidviper.core.presenter.Presenter}
  * */
-public interface PresenterDefaultContract<VM extends ViewModel>
+public interface PresenterContract<VM extends ViewModel>
 {
 
 	/**

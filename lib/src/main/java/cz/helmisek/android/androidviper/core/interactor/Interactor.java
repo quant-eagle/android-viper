@@ -1,14 +1,32 @@
 package cz.helmisek.android.androidviper.core.interactor;
 
-public abstract class Interactor
+import android.content.Context;
+import android.content.res.Resources;
+
+import cz.helmisek.android.androidviper.core.contract.InteractorContract;
+
+
+public abstract class Interactor implements InteractorContract
 {
-	public Interactor()
+	private InteractorContract mInteractorContract;
+
+
+	public void bind(InteractorContract contract)
 	{
-		init();
+		this.mInteractorContract = contract;
 	}
 
 
-	public void init()
+	@Override
+	public Context getContext()
 	{
+		return this.mInteractorContract.getContext();
+	}
+
+
+	@Override
+	public Resources getResources()
+	{
+		return this.mInteractorContract.getResources();
 	}
 }

@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 
 import java.util.HashMap;
 
-import cz.helmisek.android.androidviper.core.contract.ViewPresenterDefaultContract;
+import cz.helmisek.android.androidviper.core.contract.ViewPresenterContract;
 import cz.helmisek.android.androidviper.core.presenter.Presenter;
 import cz.helmisek.android.androidviper.core.viewmodel.ViewModel;
 
@@ -44,7 +44,7 @@ public class ViperProvider
 
 
 	@Nullable
-	public synchronized <VM extends ViewModel, VB extends ViewDataBinding> Presenter<VM, VB> getPresenter(@NonNull String presenterId, ViewPresenterDefaultContract contract, VB binding)
+	public synchronized <VM extends ViewModel, VB extends ViewDataBinding> Presenter<VM, VB> getPresenter(@NonNull String presenterId, ViewPresenterContract contract, VB binding)
 	{
 		Presenter<VM, VB> instance = (Presenter<VM, VB>) this.mPresentersMap.get(presenterId);
 		if(instance != null)
