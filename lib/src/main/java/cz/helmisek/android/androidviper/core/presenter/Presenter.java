@@ -33,12 +33,12 @@ public abstract class Presenter<VM extends ViewModel, VB extends ViewDataBinding
 
 	public void onPresenterDetached(boolean wasDestroyed)
 	{
+		this.mViewModel.unsubscribe(wasDestroyed);
 	}
 
 
 	public void onPresenterDestroyed()
 	{
-		this.mViewModel.unsubscribe(true);
 	}
 
 
