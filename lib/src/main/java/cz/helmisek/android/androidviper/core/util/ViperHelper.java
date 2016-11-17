@@ -2,6 +2,7 @@ package cz.helmisek.android.androidviper.core.util;
 
 import android.app.Activity;
 import android.databinding.DataBindingUtil;
+import android.databinding.OnRebindCallback;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 
 import java.util.UUID;
 
+import cz.helmisek.android.androidviper.BR;
 import cz.helmisek.android.androidviper.core.contract.ViewPresenterDefaultContract;
 import cz.helmisek.android.androidviper.core.presenter.Presenter;
 
@@ -29,7 +31,7 @@ public class ViperHelper<VB extends ViewDataBinding, PR extends Presenter>
 	private ViperConfig mViperConfig;
 
 
-	public void onCreate(@NonNull ViewWrapper<VB, PR> view, ViewPresenterDefaultContract<PR> presenterDefaultContract, @Nullable Bundle savedInstanceState)
+	public void onCreate(@NonNull final ViewWrapper<VB, PR> view, ViewPresenterDefaultContract<PR> presenterDefaultContract, @Nullable Bundle savedInstanceState)
 	{
 		// skip if already created
 		if(mAlreadyCreated) return;
@@ -93,7 +95,7 @@ public class ViperHelper<VB extends ViewDataBinding, PR extends Presenter>
 			{
 				if(!mBinding.setVariable(bindingVariable.getVariableId(), bindingVariable.getObject()))
 				{
-					throw new IllegalArgumentException("Binding variable "+ bindingVariable.toString() +" you have defined is not present or does not match any variable in your layout");
+					throw new IllegalArgumentException("Binding variable " + bindingVariable.toString() + " you have defined is not present or does not match any variable in your layout");
 				}
 			}
 		}

@@ -1,6 +1,6 @@
 package cz.helmisek.android.androidviper.ui;
 
-import android.databinding.DataBindingUtil;
+import android.content.Context;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,14 +11,13 @@ import android.view.ViewGroup;
 
 import cz.helmisek.android.androidviper.core.contract.ViewPresenterDefaultContract;
 import cz.helmisek.android.androidviper.core.presenter.Presenter;
+import cz.helmisek.android.androidviper.core.util.ViewWrapper;
+import cz.helmisek.android.androidviper.core.util.ViperHelper;
 
 
-//TODO: make working as well in the same way like BasePresenterActivity
-public abstract class BasePresenterFragment<P extends Presenter, VB extends ViewDataBinding> extends Fragment implements ViewPresenterDefaultContract<P>
+public abstract class BasePresenterFragment<P extends Presenter, VB extends ViewDataBinding> extends Fragment implements ViewPresenterDefaultContract<P>, ViewWrapper<VB, P>
 {
-
-	private P mPresenter;
-	private View mRootView;
+	private final ViperHelper<VB, P> mViperHelper = new ViperHelper<>();
 
 
 	public abstract int getLayoutId();
@@ -28,17 +27,8 @@ public abstract class BasePresenterFragment<P extends Presenter, VB extends View
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{
-		VB binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
-		this.mPresenter = initPresenter();
-		this.mRootView = binding.getRoot();
-		return this.mRootView;
-	}
-
-
-	@Override
-	public void onPause()
-	{
-		super.onPause();
+		mViperHelper.onCreate(this, this, savedInstanceState);
+		return mViperHelper.getBinding().getRoot();
 	}
 
 
@@ -46,12 +36,59 @@ public abstract class BasePresenterFragment<P extends Presenter, VB extends View
 	public void onResume()
 	{
 		super.onResume();
+		mViperHelper.onResume();
 	}
 
 
-
-	public View getRootView()
+	@Override
+	public void onPause()
 	{
-		return this.mRootView;
+		super.onPause();
+		mViperHelper.onPause();
 	}
+
+
+	@Override
+	public void onDestroyView()
+	{
+		mViperHelper.onDestroyView(this);
+		super.onDestroyView();
+	}
+
+
+	@Override
+	public void onDestroy()
+	{
+		mViperHelper.onDestroy(this);
+		super.onDestroy();
+	}
+
+
+	@Override
+	public void onSaveInstanceState(Bundle outState)
+	{
+		mViperHelper.onSaveInstanceState(outState);
+		super.onSaveInstanceState(outState);
+	}
+
+
+	@Override
+	public Context getContext()
+	{
+		return getActivity();
+	}
+
+
+	public P getPresenter()
+	{
+		return mViperHelper.getPresenter();
+	}
+
+
+	public VB getBinding()
+	{
+		return mViperHelper.getBinding();
+	}
+
 }
+
