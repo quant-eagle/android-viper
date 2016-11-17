@@ -13,6 +13,7 @@ import cz.helmisek.android.androidviper.core.contract.ViewPresenterDefaultContra
 import cz.helmisek.android.androidviper.core.presenter.Presenter;
 
 
+//TODO: make working as well in the same way like BasePresenterActivity
 public abstract class BasePresenterFragment<P extends Presenter, VB extends ViewDataBinding> extends Fragment implements ViewPresenterDefaultContract<P>
 {
 
