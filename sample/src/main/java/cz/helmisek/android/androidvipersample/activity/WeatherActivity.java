@@ -3,7 +3,7 @@ package cz.helmisek.android.androidvipersample.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import cz.helmisek.android.androidviper.BR;
+import cz.helmisek.android.androidvipersample.BR;
 import cz.helmisek.android.androidviper.core.util.ViperConfig;
 import cz.helmisek.android.androidviper.ui.BasePresenterActivity;
 import cz.helmisek.android.androidvipersample.R;

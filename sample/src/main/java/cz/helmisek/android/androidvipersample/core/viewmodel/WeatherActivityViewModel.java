@@ -1,6 +1,5 @@
 package cz.helmisek.android.androidvipersample.core.viewmodel;
 
-import android.content.Context;
 import android.databinding.Bindable;
 import android.databinding.ObservableField;
 import android.util.Log;
