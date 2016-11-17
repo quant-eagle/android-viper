@@ -9,4 +9,4 @@ Android implementation of VIPER architecture inspired by Clean Architecture by R
 
 # Authors
 
-Jiří Helmich & Josef Korbel
+Jiří Helmich
