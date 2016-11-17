@@ -56,6 +56,6 @@ public abstract class ViewModel<I extends Interactor, VB extends ViewDataBinding
 	@Override
 	public void onViewModelCreated()
 	{
-		mInteractor = initInteractor();
+		this.mInteractor = initInteractor();
 	}
 }

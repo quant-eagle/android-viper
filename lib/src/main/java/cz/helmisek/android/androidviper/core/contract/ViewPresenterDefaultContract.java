@@ -4,10 +4,16 @@ import cz.helmisek.android.androidviper.core.presenter.Presenter;
 
 
 /**
- * Created by Jirka Helmich on 29.09.16.
+ * The interface View presenter default contract.
+ *
+ * @param <P> any descendant of {@link Presenter} to use.
  */
-
 public interface ViewPresenterDefaultContract<P extends Presenter>
 {
+	/**
+	 * Initialize new instance of {@link Presenter} to use with any view, which should use {@link Presenter}.
+	 *
+	 * @return freshly initialized instance of {@link Presenter}
+	 */
 	P initPresenter();
 }
