@@ -21,16 +21,6 @@ public class WeatherActivityPresenter extends Presenter<WeatherActivityViewModel
 
 
 	@Override
-	public void onPresenterCreated()
-	{
-		super.onPresenterCreated();
-
-		getBinding().setPresenter(this);
-		getBinding().setViewmodel(getViewModel());
-	}
-
-
-	@Override
 	public void onLocationSubmit()
 	{
 		getViewModel().setupWeatherInformation(getBinding().weatherLocation.getText().toString());
