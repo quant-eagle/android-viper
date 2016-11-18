@@ -6,10 +6,6 @@ import cz.helmisek.android.androidvipersample.core.viewmodel.WeatherActivityView
 import cz.helmisek.android.androidvipersample.databinding.ActivityWeatherBinding;
 
 
-/**
- * Created by Jirka Helmich on 11.10.16.
- */
-
 public class WeatherActivityPresenter extends Presenter<WeatherActivityViewModel, ActivityWeatherBinding> implements WeatherActivityViewInteractor
 {
 

@@ -15,10 +15,6 @@ import retrofit2.Response;
 import rx.functions.Action1;
 
 
-/**
- * Created by Jirka Helmich on 11.10.16.
- */
-
 public class WeatherActivityViewModel extends ViewModel<WeatherInteractor, ActivityWeatherBinding>
 {
 

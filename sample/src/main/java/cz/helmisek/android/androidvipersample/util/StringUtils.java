@@ -5,10 +5,6 @@ import android.support.annotation.NonNull;
 import java.util.Locale;
 
 
-/**
- * Created by Jirka Helmich on 17.10.16.
- */
-
 public class StringUtils
 {
 

@@ -7,10 +7,6 @@ import retrofit2.http.Query;
 import rx.Observable;
 
 
-/**
- * Created by Jirka Helmich on 11.10.16.
- */
-
 public interface WeatherAPIEndpoint
 {
 

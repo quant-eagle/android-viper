@@ -3,11 +3,6 @@ package cz.helmisek.android.androidvipersample.core.entity.api;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-
-/**
- * Created by Jirka Helmich on 11.10.16.
- */
-
 public class Coord
 {
 

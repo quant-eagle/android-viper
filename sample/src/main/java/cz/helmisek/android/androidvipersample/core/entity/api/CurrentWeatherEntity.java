@@ -7,10 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * Created by Jirka Helmich on 11.10.16.
- */
-
 public class CurrentWeatherEntity
 {
 

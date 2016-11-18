@@ -8,10 +8,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import rx.schedulers.Schedulers;
 
 
-/**
- * Created by Jirka Helmich on 11.10.16.
- */
-
 public abstract class RetrofitApiInteractor extends Interactor
 {
 
@@ -32,7 +28,6 @@ public abstract class RetrofitApiInteractor extends Interactor
 	{
 		this.mRetrofit = getRetrofitBuilder().build();
 	}
-
 
 
 	public Retrofit.Builder getDefaultRetrofitBuilder()

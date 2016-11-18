@@ -19,10 +19,6 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 
 
-/**
- * Created by Jirka Helmich on 11.10.16.
- */
-
 public class WeatherInteractor extends RetrofitApiInteractor
 {
 

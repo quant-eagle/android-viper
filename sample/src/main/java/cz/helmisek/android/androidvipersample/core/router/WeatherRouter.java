@@ -7,10 +7,6 @@ import cz.helmisek.android.androidviper.core.router.Router;
 import cz.helmisek.android.androidvipersample.activity.WeatherActivity;
 
 
-/**
- * Created by Jirka Helmich on 11.10.16.
- */
-
 public class WeatherRouter extends Router
 {
 
