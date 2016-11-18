@@ -30,7 +30,7 @@ public class WeatherActivityViewModel extends ViewModel<WeatherInteractor, Activ
 	@Override
 	public WeatherInteractor initInteractor()
 	{
-		return new WeatherInteractor(getContext());
+		return new WeatherInteractor();
 	}
 
 

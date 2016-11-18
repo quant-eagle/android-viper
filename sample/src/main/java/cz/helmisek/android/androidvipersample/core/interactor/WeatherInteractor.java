@@ -31,24 +31,22 @@ public class WeatherInteractor extends RetrofitApiInteractor
 	private static final String QUERY_PARAM_APP_ID = "appid";
 	private static final String PREF_KEY_LAST_WEATHER_LOCATION = "last_weather_location";
 
-	private Context mContext;
-
 
 	@Override
 	public Retrofit.Builder getRetrofitBuilder()
 	{
 		final Retrofit.Builder retrofitBuilder = getDefaultRetrofitBuilder();
-		OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+		final OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 		httpClient.addInterceptor(new Interceptor()
 		{
 			@Override
 			public okhttp3.Response intercept(Chain chain) throws IOException
 			{
-				Request original = chain.request();
-				HttpUrl httpUrl = original.url().newBuilder()
+				final Request original = chain.request();
+				final HttpUrl httpUrl = original.url().newBuilder()
 						.addQueryParameter(QUERY_PARAM_APP_ID, ApiConfig.OPENWEATHER_API_KEY)
 						.build();
-				Request request = original.newBuilder().url(httpUrl).build();
+				final Request request = original.newBuilder().url(httpUrl).build();
 				return chain.proceed(request);
 			}
 		});
@@ -64,13 +62,6 @@ public class WeatherInteractor extends RetrofitApiInteractor
 	}
 
 
-	public WeatherInteractor(Context context)
-	{
-		super();
-		this.mContext = context;
-	}
-
-
 	public Observable<Response<CurrentWeatherEntity>> loadCurrentWeather(String location)
 	{
 		return getEndpoint(WeatherAPIEndpoint.class)
@@ -81,14 +72,16 @@ public class WeatherInteractor extends RetrofitApiInteractor
 
 	public String getLastLocation()
 	{
-		SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+		SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 		return mSharedPreferences.getString(PREF_KEY_LAST_WEATHER_LOCATION, "London");
 	}
 
 
 	public void setLastLocation(final String location)
 	{
-		SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+		SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 		mSharedPreferences.edit().putString(PREF_KEY_LAST_WEATHER_LOCATION, location).apply();
 	}
+
+
 }

@@ -11,11 +11,12 @@ public abstract class Interactor implements InteractorContract
 	private InteractorContract mInteractorContract;
 
 
-	public void bind(InteractorContract contract)
+	public void bind(final InteractorContract contract)
 	{
 		this.mInteractorContract = contract;
 	}
 
+	public void init(){}
 
 	@Override
 	public Context getContext()
