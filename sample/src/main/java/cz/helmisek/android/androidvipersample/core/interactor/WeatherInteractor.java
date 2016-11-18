@@ -1,6 +1,5 @@
 package cz.helmisek.android.androidvipersample.core.interactor;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
