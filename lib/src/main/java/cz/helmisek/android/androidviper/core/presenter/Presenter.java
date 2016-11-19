@@ -2,6 +2,7 @@ package cz.helmisek.android.androidviper.core.presenter;
 
 import android.content.Context;
 import android.databinding.ViewDataBinding;
+import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 
@@ -22,13 +23,17 @@ public abstract class Presenter<VM extends ViewModel, VB extends ViewDataBinding
 	/**
 	 * Bounded {@link ViewModel} descendant instance.
 	 * Used to control View states, behavior and data on View interactions.
-	 * */
+	 */
 	private VM mViewModel;
 
 	/**
-	 *
-	 * */
+	 * ViewWrapper instance to provide all necessary View related objects to all of the descendants.
+	 */
 	private ViewWrapper<VB, ? extends Presenter> mWrapper;
+
+	/**
+	 * Describing whether this attachment went trough its initial attachment or not.
+	 */
 	private boolean firstAttachment = true;
 
 
@@ -55,45 +60,42 @@ public abstract class Presenter<VM extends ViewModel, VB extends ViewDataBinding
 
 
 	/**
-	 * On presenter detached.
+	 * Called when presenter is detached from the View.
 	 *
-	 * @param wasDestroyed the was destroyed
+	 * @param wasDestroyed Describes whether this instance of presenter has been totally destroyed or just finished.
 	 */
 	public void onPresenterDetached(boolean wasDestroyed)
-	{
-		this.mViewModel.unsubscribe(wasDestroyed);
-	}
-
-
-	/**
-	 * On presenter destroyed.
-	 */
-	public void onPresenterDestroyed()
-	{
-	}
-
-
-	@Override
-	public void onResume()
-	{
-		this.mViewModel.subscribe(this.firstAttachment);
-	}
-
-
-	@Override
-	public void onPause()
-	{
-		unsubscribe();
-	}
-
-
-	private void unsubscribe()
 	{
 		if(firstAttachment)
 		{
 			firstAttachment = false;
 		}
-		this.mViewModel.unsubscribe(false);
+
+		this.mViewModel.unsubscribe(wasDestroyed);
+	}
+
+
+	/**
+	 * Called when presenter is removed from memory.
+	 */
+	public void onPresenterRemoved()
+	{
+	}
+
+
+	/**
+	 * System life cycle impl method - On resume.
+	 */
+	public void onResume()
+	{
+	}
+
+
+	/**
+	 * System life cycle impl method - On pause.
+	 */
+	public void onPause()
+	{
 	}
 
 
@@ -138,11 +140,11 @@ public abstract class Presenter<VM extends ViewModel, VB extends ViewDataBinding
 
 
 	/**
-	 * Bind.
+	 * Bind already defined and initialized instance of {@link ViewWrapper} to this instance.
 	 *
-	 * @param viewWrapper the view wrapper
+	 * @param viewWrapper NonNull instance of {@link ViewWrapper}
 	 */
-	public void bind(ViewWrapper<VB, ? extends Presenter> viewWrapper)
+	public void bind(@NonNull ViewWrapper<VB, ? extends Presenter> viewWrapper)
 	{
 		this.mWrapper = viewWrapper;
 

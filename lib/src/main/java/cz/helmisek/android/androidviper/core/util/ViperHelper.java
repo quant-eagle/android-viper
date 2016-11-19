@@ -258,7 +258,7 @@ public class ViperHelper<VB extends ViewDataBinding, PR extends Presenter>
 		if(!mInstanceRemoved)
 		{
 			ViperProvider.getInstance().removePresenter(mPresenterId);
-			this.mPresenter.onPresenterDestroyed();
+			this.mPresenter.onPresenterRemoved();
 			this.mInstanceRemoved = true;
 			this.mAlreadyCreated = false;
 		}
