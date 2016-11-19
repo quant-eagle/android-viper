@@ -25,12 +25,12 @@ public interface PresenterContract<VM extends ViewModel>
 	VM getViewModel();
 
 	/**
-	 * OnPause impl for Presenter - should be called in a lifecycle of presenter held by a view
+	 * onPresenterDetached impl for Presenter - should be called in a lifecycle of presenter held by a view
 	 */
 	void onPresenterDetached(boolean wasDestroyed);
 
 	/**
-	 * OnResume impl for Presenter - should be called in a lifecycle of presenter held by a view
+	 * onPresenterAttached impl for Presenter - should be called in a lifecycle of presenter held by a view
 	 */
 	void onPresenterAttached(boolean firstAttachment);
 
