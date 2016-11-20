@@ -2,21 +2,26 @@ package cz.helmisek.android.androidviper.core.util;
 
 /**
  * Viper config implementation.
- *
  */
 public class ViperConfig
 {
+	private enum ViperConfigMode
+	{
+		STANDARD,
+		NON_STANDARD;
+	}
+
+
 	private int mPresenterVariableId;
 	private int mViewModelVariableId;
-	private boolean mStandardMode = true;
+	private ViperConfigMode mViperConfigMode = ViperConfigMode.STANDARD;
 	private CustomBindingVariable[] customBindingVariablesArray;
 
 
 	/**
 	 * Instantiates a new Viper config instance.
 	 *
-	 * @param presenterVariableId
-	 * 			the {@link cz.helmisek.android.androidviper.core.presenter.Presenter} binding variable id
+	 * @param presenterVariableId the {@link cz.helmisek.android.androidviper.core.presenter.Presenter} binding variable id
 	 */
 	public ViperConfig(int presenterVariableId)
 	{
@@ -27,10 +32,8 @@ public class ViperConfig
 	/**
 	 * Instantiates a new Viper config instance.
 	 *
-	 * @param presenterVariableId
-	 * 			the {@link cz.helmisek.android.androidviper.core.presenter.Presenter} binding variable id
-	 * 	@param viewModelVariableId
-	 * 			the {@link cz.helmisek.android.androidviper.core.viewmodel.ViewModel} binding variable id
+	 * @param presenterVariableId the {@link cz.helmisek.android.androidviper.core.presenter.Presenter} binding variable id
+	 * @param viewModelVariableId the {@link cz.helmisek.android.androidviper.core.viewmodel.ViewModel} binding variable id
 	 */
 	public ViperConfig(int presenterVariableId, int viewModelVariableId)
 	{
@@ -49,7 +52,7 @@ public class ViperConfig
 	{
 		this(-1, -1);
 		this.customBindingVariablesArray = customBindingVariablesArray;
-		this.mStandardMode = false;
+		this.mViperConfigMode = ViperConfigMode.NON_STANDARD;
 	}
 
 
@@ -104,7 +107,7 @@ public class ViperConfig
 	 */
 	boolean isStandard()
 	{
-		return this.mStandardMode;
+		return this.mViperConfigMode == ViperConfigMode.STANDARD;
 	}
 
 
