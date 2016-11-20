@@ -8,7 +8,9 @@ import cz.helmisek.android.androidviper.core.presenter.Presenter;
 
 
 /**
- * The interface describing View holding our {@link Presenter} ({@link android.support.v4.app.Fragment} or {@link Activity}.
+ * The interface describing View holding our {@link Presenter} instance - View could be referred to as one of following
+ * {@link android.support.v4.app.Fragment} or {@link Activity}.
+ *
  * Methods described here are propagated to our {@link Presenter} instance to be accessed there.
  *
  * @param <VB> any {@link ViewDataBinding} type
