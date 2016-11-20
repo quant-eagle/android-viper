@@ -1,9 +1,5 @@
 package cz.helmisek.android.androidviper.core.util;
 
-/**
- * Created by Jirka Helmich on 17.11.16.
- */
-
 public class ViperConfig
 {
 	private int mPresenterVariableId;

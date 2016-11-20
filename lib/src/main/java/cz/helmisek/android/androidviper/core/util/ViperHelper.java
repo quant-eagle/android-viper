@@ -55,7 +55,7 @@ public class ViperHelper<VB extends ViewDataBinding, PR extends Presenter>
 		}
 
 		// get presenter instance for this screen
-		mPresenter = (PR) ViperProvider.getInstance().getPresenter(mPresenterId, presenterDefaultContract, mBinding);
+		mPresenter = (PR) ViperProvider.getInstance().getPresenter(mPresenterId, presenterDefaultContract);
 		mOnSaveInstanceCalled = false;
 
 		// bind all together

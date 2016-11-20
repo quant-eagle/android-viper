@@ -59,12 +59,12 @@ public abstract class BasePresenterActivity<P extends Presenter, VB extends View
 	@Override
 	public Context getContext()
 	{
-		return getActivity();
+		return getApplicationContext();
 	}
 
 
 	@Override
-	public Activity getActivity()
+	public Activity getActivityContext()
 	{
 		return this;
 	}

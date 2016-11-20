@@ -1,10 +1,12 @@
 package cz.helmisek.android.androidviper.ui;
 
+import android.app.Activity;
 import android.content.Context;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,6 +76,13 @@ public abstract class BasePresenterFragment<P extends Presenter, VB extends View
 
 	@Override
 	public Context getContext()
+	{
+		return getActivity().getApplicationContext();
+	}
+
+
+	@Override
+	public Activity getActivityContext()
 	{
 		return getActivity();
 	}
