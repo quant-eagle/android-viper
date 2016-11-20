@@ -1,7 +1,8 @@
 package cz.helmisek.android.androidviper.core.util;
 
 /**
- * The type Viper config.
+ * Viper config implementation.
+ *
  */
 public class ViperConfig
 {
@@ -12,9 +13,10 @@ public class ViperConfig
 
 
 	/**
-	 * Instantiates a new Viper config.
+	 * Instantiates a new Viper config instance.
 	 *
-	 * @param presenterVariableId the presenter variable id
+	 * @param presenterVariableId
+	 * 			the {@link cz.helmisek.android.androidviper.core.presenter.Presenter} binding variable id
 	 */
 	public ViperConfig(int presenterVariableId)
 	{
@@ -23,10 +25,12 @@ public class ViperConfig
 
 
 	/**
-	 * Instantiates a new Viper config.
+	 * Instantiates a new Viper config instance.
 	 *
-	 * @param presenterVariableId the presenter variable id
-	 * @param viewModelVariableId the view model variable id
+	 * @param presenterVariableId
+	 * 			the {@link cz.helmisek.android.androidviper.core.presenter.Presenter} binding variable id
+	 * 	@param viewModelVariableId
+	 * 			the {@link cz.helmisek.android.androidviper.core.viewmodel.ViewModel} binding variable id
 	 */
 	public ViperConfig(int presenterVariableId, int viewModelVariableId)
 	{
@@ -36,9 +40,10 @@ public class ViperConfig
 
 
 	/**
-	 * Instantiates a new Viper config.
+	 * Instantiates a new Viper config instance.
 	 *
-	 * @param customBindingVariablesArray the custom binding variables array
+	 * @param customBindingVariablesArray Array consisting of {@link CustomBindingVariable} objects defining
+	 *                                    binding variables to be rebound to their object after configuration changes.
 	 */
 	public ViperConfig(CustomBindingVariable[] customBindingVariablesArray)
 	{
