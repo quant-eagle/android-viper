@@ -55,7 +55,7 @@ public abstract class Presenter<VM extends ViewModel, VB extends ViewDataBinding
 	 */
 	public void onPresenterAttached(boolean firstAttachment)
 	{
-		this.mViewModel.subscribe(firstAttachment);
+		this.mViewModel.onViewModelAttached(firstAttachment);
 	}
 
 
@@ -71,7 +71,7 @@ public abstract class Presenter<VM extends ViewModel, VB extends ViewDataBinding
 			firstAttachment = false;
 		}
 
-		this.mViewModel.unsubscribe(wasDestroyed);
+		this.mViewModel.onViewModelDetached(wasDestroyed);
 	}
 
 
@@ -80,6 +80,7 @@ public abstract class Presenter<VM extends ViewModel, VB extends ViewDataBinding
 	 */
 	public void onPresenterRemoved()
 	{
+		this.mViewModel.onViewModelRemoved();
 	}
 
 

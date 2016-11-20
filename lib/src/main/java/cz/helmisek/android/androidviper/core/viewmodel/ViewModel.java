@@ -12,25 +12,54 @@ import cz.helmisek.android.androidviper.core.presenter.Presenter;
 import cz.helmisek.android.androidviper.core.util.ViewWrapper;
 
 
+/**
+ * ViewModel definition described below has got to be used as an ancestor to every ViewModel used in VIPER
+ * framework. ViewModel should handle View states and prepare information for the View.
+ *
+ * @param <I>  Any {@link Interactor} type
+ * @param <VB> Any {@link ViewDataBinding} type
+ */
 public abstract class ViewModel<I extends Interactor, VB extends ViewDataBinding> extends BaseObservable implements ViewModelContract<I>, InteractorContract
 {
 
+	/**
+	 * ViewWrapper instance to provide all necessary View related objects to all of the descendants.
+	 */
 	private ViewWrapper<VB, ? extends Presenter> mWrapper;
+
+	/**
+	 * An instance of {@link Interactor} type specific for this ViewModel instance.
+	 */
 	private I mInteractor;
 
 
+	/**
+	 * Bind an already defined ViewWrapper instance with provided objects to our ViewWrapper instance.
+	 *
+	 * @param viewWrapper {@link ViewWrapper} initialized instance to provide object to lower levels
+	 */
 	public void bind(ViewWrapper<VB, ? extends Presenter> viewWrapper)
 	{
 		this.mWrapper = viewWrapper;
 	}
 
 
+	/**
+	 * Gets binding.
+	 *
+	 * @return the binding
+	 */
 	public VB getBinding()
 	{
 		return mWrapper.getBinding();
 	}
 
 
+	/**
+	 * Get our specific {@link Interactor} type instance.
+	 *
+	 * @return {@link Interactor} type instance
+	 */
 	public I getInteractor()
 	{
 		return this.mInteractor;
@@ -38,13 +67,19 @@ public abstract class ViewModel<I extends Interactor, VB extends ViewDataBinding
 
 
 	@Override
-	public void subscribe(boolean firstAttachment)
+	public void onViewModelAttached(boolean firstAttachment)
 	{
 	}
 
 
 	@Override
-	public void unsubscribe(boolean wasDestroyed)
+	public void onViewModelDetached(boolean wasDestroyed)
+	{
+	}
+
+
+	@Override
+	public void onViewModelRemoved()
 	{
 	}
 
@@ -56,7 +91,6 @@ public abstract class ViewModel<I extends Interactor, VB extends ViewDataBinding
 		this.mInteractor.bind(this);
 		this.mInteractor.init();
 	}
-
 
 	@Override
 	public Resources getResources()
@@ -70,4 +104,6 @@ public abstract class ViewModel<I extends Interactor, VB extends ViewDataBinding
 	{
 		return mWrapper.getContext();
 	}
+
+
 }

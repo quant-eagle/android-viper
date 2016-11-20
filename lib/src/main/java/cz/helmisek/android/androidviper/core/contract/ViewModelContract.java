@@ -19,13 +19,19 @@ public interface ViewModelContract<I extends Interactor>
 	void onViewModelCreated();
 
 	/**
+	 * Should be called when {@link cz.helmisek.android.androidviper.core.presenter.Presenter} is about to get
+	 * removed from the memory and so is going to die as well as its children.
+	 */
+	void onViewModelRemoved();
+
+	/**
 	 * Called every time {@link cz.helmisek.android.androidviper.core.presenter.Presenter} is reattached to a window or
 	 * when it has been created.
 	 *
 	 * @param firstAttachment - result of expression (if {@link cz.helmisek.android.androidviper.core.presenter.Presenter}
 	 *                           was attached to the window for the first time)
 	 * */
-	void subscribe(boolean firstAttachment);
+	void onViewModelAttached(boolean firstAttachment);
 
 	/**
 	 * Unsubscribe method is called when {@link cz.helmisek.android.androidviper.core.viewmodel.ViewModel}
@@ -35,7 +41,7 @@ public interface ViewModelContract<I extends Interactor>
 	 *                     instance of {@link cz.helmisek.android.androidviper.core.viewmodel.ViewModel} is not going to live anymore.
 	 *                     Else it is going to be revived later (on config change etc).
 	 */
-	void unsubscribe(boolean wasDestroyed);
+	void onViewModelDetached(boolean wasDestroyed);
 
 	/**
 	 * Initialization of freshly new {@link Interactor} descendant instance for
