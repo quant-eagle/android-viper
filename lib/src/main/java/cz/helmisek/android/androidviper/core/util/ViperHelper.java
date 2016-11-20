@@ -32,66 +32,66 @@ public class ViperHelper<VB extends ViewDataBinding, PR extends Presenter>
 	public void onCreate(@NonNull final ViewWrapper<VB, PR> view, ViewPresenterContract<PR> presenterDefaultContract, @Nullable Bundle savedInstanceState)
 	{
 		// skip if already created
-		if(mAlreadyCreated) return;
+		if(this.mAlreadyCreated) return;
 
 		// perform Data Binding initialization
-		mAlreadyCreated = true;
+		this.mAlreadyCreated = true;
 
 		if(view instanceof Activity)
-			mBinding = DataBindingUtil.setContentView(((Activity) view), view.getLayoutId());
+			this.mBinding = DataBindingUtil.setContentView(((Activity) view), view.getLayoutId());
 		else if(view instanceof Fragment)
-			mBinding = DataBindingUtil.inflate(LayoutInflater.from(view.getContext()), view.getLayoutId(), null, false);
+			this.mBinding = DataBindingUtil.inflate(LayoutInflater.from(view.getContext()), view.getLayoutId(), null, false);
 		else
 			throw new IllegalArgumentException("View must be an instance of Activity or Fragment (support-v4).");
 
 
 		// obtain unique PresenterId
-		if(mPresenterId == null)
+		if(this.mPresenterId == null)
 		{ // screen (activity/fragment) created for first time, attach unique ID
 			if(savedInstanceState == null)
-				mPresenterId = UUID.randomUUID().toString();
+				this.mPresenterId = UUID.randomUUID().toString();
 			else
-				mPresenterId = savedInstanceState.getString(getPresenterIdFieldName());
+				this.mPresenterId = savedInstanceState.getString(getPresenterIdFieldName());
 		}
 
 		// get presenter instance for this screen
-		mPresenter = (PR) ViperProvider.getInstance().getPresenter(mPresenterId, presenterDefaultContract);
-		mOnSaveInstanceCalled = false;
+		this.mPresenter = (PR) ViperProvider.getInstance().getPresenter(this.mPresenterId, presenterDefaultContract);
+		this.mOnSaveInstanceCalled = false;
 
 		// bind all together
-		mPresenter.bind(view);
+		this.mPresenter.bind(view);
 
 		// call ViewModel callback
-		if(mPresenter.isFirstAttachment())
-			mPresenter.onPresenterCreated();
+		if(this.mPresenter.isFirstAttachment())
+			this.mPresenter.onPresenterCreated();
 
 		rebind(view);
 
-		mPresenter.onPresenterAttached(mPresenter.isFirstAttachment());
+		this.mPresenter.onPresenterAttached(this.mPresenter.isFirstAttachment());
 	}
 
 
 	private void rebind(@NonNull ViewWrapper<VB, PR> view)
 	{
-		if(mViperConfig.isStandard())
+		if(this.mViperConfig.isStandard())
 		{
-			if(!mBinding.setVariable(mViperConfig.getPresenterVariableId(), mPresenter))
+			if(!this.mBinding.setVariable(this.mViperConfig.getPresenterVariableId(), this.mPresenter))
 			{
 				throw new IllegalArgumentException("Binding variable wasn't set successfully. Probably viewModelVariableName of your " +
 						"ViewModelBindingConfig of " + view.getClass().getSimpleName() + " doesn't match any variable in "
-						+ mBinding.getClass().getSimpleName());
+						+ this.mBinding.getClass().getSimpleName());
 			}
 			else
 			{
-				if(mViperConfig.hasViewModel())
-					mBinding.setVariable(mViperConfig.getViewModelVariableId(), mPresenter.getViewModel());
+				if(this.mViperConfig.hasViewModel())
+					this.mBinding.setVariable(this.mViperConfig.getViewModelVariableId(), this.mPresenter.getViewModel());
 			}
 		}
 		else
 		{
-			for(ViperConfig.CustomBindingVariable bindingVariable : mViperConfig.getCustomBindingVariablesArray())
+			for(ViperConfig.CustomBindingVariable bindingVariable : this.mViperConfig.getCustomBindingVariablesArray())
 			{
-				if(!mBinding.setVariable(bindingVariable.getVariableId(), bindingVariable.getObject()))
+				if(!this.mBinding.setVariable(bindingVariable.getVariableId(), bindingVariable.getObject()))
 				{
 					throw new IllegalArgumentException("Binding variable " + bindingVariable.toString() + " you have defined is not present or does not match any variable in your layout");
 				}
@@ -105,7 +105,7 @@ public class ViperHelper<VB extends ViewDataBinding, PR extends Presenter>
 	 */
 	public void onResume()
 	{
-		if(mPresenter != null) mPresenter.onResume();
+		if(this.mPresenter != null) this.mPresenter.onResume();
 	}
 
 
@@ -114,7 +114,7 @@ public class ViperHelper<VB extends ViewDataBinding, PR extends Presenter>
 	 */
 	public void onPause()
 	{
-		if(mPresenter != null) mPresenter.onPause();
+		if(this.mPresenter != null) this.mPresenter.onPause();
 	}
 
 
@@ -127,17 +127,17 @@ public class ViperHelper<VB extends ViewDataBinding, PR extends Presenter>
 	 */
 	public void onDestroyView(@NonNull Fragment fragment)
 	{
-		if(mPresenter == null) return;
+		if(this.mPresenter == null) return;
 
 		if(fragment.getActivity() != null && fragment.getActivity().isFinishing())
 		{
-			mPresenter.onPresenterDetached(true);
+			this.mPresenter.onPresenterDetached(true);
 			removePresenter();
 		}
 		else
 		{
-			mPresenter.onPresenterDetached(false);
-			mAlreadyCreated = false;
+			this.mPresenter.onPresenterDetached(false);
+			this.mAlreadyCreated = false;
 		}
 	}
 
@@ -150,20 +150,20 @@ public class ViperHelper<VB extends ViewDataBinding, PR extends Presenter>
 	 */
 	public void onDestroy(@NonNull Fragment fragment)
 	{
-		if(mPresenter == null) return;
+		if(this.mPresenter == null) return;
 
 		if(fragment.getActivity().isFinishing())
 		{
 			removePresenter();
 		}
-		else if(fragment.isRemoving() && !mOnSaveInstanceCalled)
+		else if(fragment.isRemoving() && !this.mOnSaveInstanceCalled)
 		{
 			// The fragment can be still in backstack even if isRemoving() is true.
 			// We check mOnSaveInstanceCalled - if this was not called then the fragment is totally removed.
 			Log.d(LOG_TAG, "Removing presenter - fragment replaced");
 			removePresenter();
 		}
-		mAlreadyCreated = false;
+		this.mAlreadyCreated = false;
 	}
 
 
@@ -175,16 +175,16 @@ public class ViperHelper<VB extends ViewDataBinding, PR extends Presenter>
 	 */
 	public void onDestroy(@NonNull Activity activity)
 	{
-		if(mPresenter == null) return;
+		if(this.mPresenter == null) return;
 
 		if(activity.isFinishing())
 		{
-			mPresenter.onPresenterDetached(true);
+			this.mPresenter.onPresenterDetached(true);
 			removePresenter();
 		}
 		else
-			mPresenter.onPresenterDetached(false);
-		mAlreadyCreated = false;
+			this.mPresenter.onPresenterDetached(false);
+		this.mAlreadyCreated = false;
 	}
 
 
@@ -209,11 +209,11 @@ public class ViperHelper<VB extends ViewDataBinding, PR extends Presenter>
 	 */
 	public void onSaveInstanceState(@NonNull Bundle bundle)
 	{
-		bundle.putString(getPresenterIdFieldName(), mPresenterId);
-		if(mPresenter != null)
+		bundle.putString(getPresenterIdFieldName(), this.mPresenterId);
+		if(this.mPresenter != null)
 		{
-			ViperProvider.getInstance().addPresenter(mPresenterId, mPresenter);
-			mOnSaveInstanceCalled = true;
+			ViperProvider.getInstance().addPresenter(this.mPresenterId, this.mPresenter);
+			this.mOnSaveInstanceCalled = true;
 		}
 	}
 
@@ -246,7 +246,7 @@ public class ViperHelper<VB extends ViewDataBinding, PR extends Presenter>
 	@NonNull
 	private String getPresenterIdFieldName()
 	{
-		return "__internal_presenter_id";
+		return "__internal_presenter_id_" + this.mPresenterId;
 	}
 
 
@@ -255,7 +255,7 @@ public class ViperHelper<VB extends ViewDataBinding, PR extends Presenter>
 	 */
 	private void removePresenter()
 	{
-		if(!mInstanceRemoved)
+		if(!this.mInstanceRemoved)
 		{
 			ViperProvider.getInstance().removePresenter(mPresenterId);
 			this.mPresenter.onPresenterRemoved();
