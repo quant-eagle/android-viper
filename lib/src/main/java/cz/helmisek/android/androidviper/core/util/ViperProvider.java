@@ -11,6 +11,9 @@ import cz.helmisek.android.androidviper.core.presenter.Presenter;
 import cz.helmisek.android.androidviper.core.viewmodel.ViewModel;
 
 
+/**
+ * Internal library Singleton class to handle all VIPER important instances.
+ */
 class ViperProvider
 {
 	private static ViperProvider sInstance;
