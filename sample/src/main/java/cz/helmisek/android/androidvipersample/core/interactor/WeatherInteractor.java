@@ -9,6 +9,8 @@ import cz.helmisek.android.androidvipersample.api.ApiConfig;
 import cz.helmisek.android.androidvipersample.api.WeatherAPIEndpoint;
 import cz.helmisek.android.androidvipersample.core.entity.api.CurrentWeatherEntity;
 import cz.helmisek.android.androidvipersample.core.interactor.base.RetrofitApiInteractor;
+import cz.helmisek.android.androidvipersample.core.interactor.repository.LocationRepository;
+import cz.helmisek.android.androidvipersample.core.interactor.repository.WeatherRepository;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -19,7 +21,7 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 
 
-public class WeatherInteractor extends RetrofitApiInteractor
+public class WeatherInteractor extends RetrofitApiInteractor implements WeatherRepository, LocationRepository
 {
 
 	private static final String UNITS_METRIC = "metric";
@@ -57,6 +59,7 @@ public class WeatherInteractor extends RetrofitApiInteractor
 	}
 
 
+	@Override
 	public Observable<Response<CurrentWeatherEntity>> loadCurrentWeather(String location)
 	{
 		return getEndpoint(WeatherAPIEndpoint.class)
@@ -65,6 +68,7 @@ public class WeatherInteractor extends RetrofitApiInteractor
 	}
 
 
+	@Override
 	public String getLastLocation()
 	{
 		SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
@@ -72,6 +76,7 @@ public class WeatherInteractor extends RetrofitApiInteractor
 	}
 
 
+	@Override
 	public void setLastLocation(final String location)
 	{
 		SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
