@@ -26,7 +26,6 @@ public class WeatherInteractor extends RetrofitApiInteractor implements WeatherR
 
 	private static final String UNITS_METRIC = "metric";
 	private static final String QUERY_PARAM_APP_ID = "appid";
-	private static final String PREF_KEY_LAST_WEATHER_LOCATION = "last_weather_location";
 
 
 	@Override
@@ -37,7 +36,7 @@ public class WeatherInteractor extends RetrofitApiInteractor implements WeatherR
 		httpClient.addInterceptor(new Interceptor()
 		{
 			@Override
-			public okhttp3.Response intercept(Chain chain) throws IOException
+			public okhttp3.Response intercept(final Chain chain) throws IOException
 			{
 				final Request original = chain.request();
 				final HttpUrl httpUrl = original.url().newBuilder()
@@ -72,7 +71,7 @@ public class WeatherInteractor extends RetrofitApiInteractor implements WeatherR
 	public String getLastLocation()
 	{
 		SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-		return mSharedPreferences.getString(PREF_KEY_LAST_WEATHER_LOCATION, "London");
+		return mSharedPreferences.getString(PREF_KEY_LAST_WEATHER_LOCATION, DEFAULT_LAST_WEATHER_LOCATION_VALUE);
 	}
 
 
