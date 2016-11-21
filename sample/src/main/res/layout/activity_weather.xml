@@ -10,10 +10,6 @@
 			name="presenter"
 			type="cz.helmisek.android.androidvipersample.core.presenter.WeatherActivityPresenter"/>
 
-		<variable
-			name="viewmodel"
-			type="cz.helmisek.android.androidvipersample.core.viewmodel.WeatherActivityViewModel"/>
-
 		<import type="cz.helmisek.android.androidvipersample.util.StringUtils"/>
 
 	</data>
@@ -35,7 +31,7 @@
 		<cz.kinst.jakub.view.StatefulLayout
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			app:state="@{viewmodel.state}">
+			app:state="@{presenter.getViewModel().state}">
 
 			<RelativeLayout
 				android:layout_width="match_parent"
@@ -75,7 +71,7 @@
 					android:layout_below="@+id/weatherLocation"
 					android:layout_centerHorizontal="true"
 					android:layout_marginTop="@dimen/activity_vertical_margin"
-					android:text='@{StringUtils.parseTemperature(viewmodel.currentWeatherEntity.main.temp)}'
+					android:text='@{StringUtils.parseTemperature(presenter.getViewModel().currentWeatherEntity.main.temp)}'
 					android:textColor="@android:color/white"
 					android:textSize="48sp"
 					tools:text="24C"/>

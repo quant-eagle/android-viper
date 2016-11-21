@@ -24,7 +24,7 @@ public class WeatherActivity extends BasePresenterActivity<WeatherActivityPresen
 	@Override
 	protected ViperConfig setupViperConfig()
 	{
-		return new ViperConfig(BR.presenter, BR.viewmodel);
+		return new ViperConfig(BR.presenter);
 	}
 
 
