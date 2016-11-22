@@ -24,8 +24,8 @@ public class WeatherActivityPresenter extends Presenter<WeatherActivityViewModel
 		super.onPresenterCreated();
 
 		getBinding().weatherLocation.setText(getViewModel().getLastLocation());
-		refreshWeatherData();
 
+		refreshWeatherData();
 	}
 
 
