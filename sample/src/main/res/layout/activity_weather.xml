@@ -75,6 +75,16 @@
 					android:textColor="@android:color/white"
 					android:textSize="48sp"
 					tools:text="24C"/>
+
+				<TextView
+					android:id="@+id/requestState"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:gravity="bottom"
+					tools:text="@string/success"
+					android:layout_centerInParent="true"
+					android:textColor="#FFF"
+					android:textSize="24sp"/>
 			</RelativeLayout>
 
 		</cz.kinst.jakub.view.StatefulLayout>

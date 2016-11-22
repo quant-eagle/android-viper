@@ -1,11 +1,11 @@
 package cz.helmisek.android.androidvipersample.core.presenter;
 
 import cz.helmisek.android.androidviper.core.presenter.Presenter;
+import cz.helmisek.android.androidvipersample.R;
 import cz.helmisek.android.androidvipersample.core.viewinteractor.WeatherActivityViewInteractor;
 import cz.helmisek.android.androidvipersample.core.viewinteractor.WeatherPresenterViewModelContract;
 import cz.helmisek.android.androidvipersample.core.viewmodel.WeatherActivityViewModel;
 import cz.helmisek.android.androidvipersample.databinding.ActivityWeatherBinding;
-import cz.kinst.jakub.view.StatefulLayout;
 
 
 public class WeatherActivityPresenter extends Presenter<WeatherActivityViewModel, ActivityWeatherBinding> implements WeatherActivityViewInteractor, WeatherPresenterViewModelContract
@@ -39,7 +39,8 @@ public class WeatherActivityPresenter extends Presenter<WeatherActivityViewModel
 	@Override
 	public void onWeatherInformationReady(boolean successfully)
 	{
-		getViewModel().state.set(successfully ? StatefulLayout.State.CONTENT : StatefulLayout.State.EMPTY);
+		getBinding().requestState.setText(successfully ?
+				getContext().getString(R.string.success) : getContext().getString(R.string.errr));
 	}
 
 

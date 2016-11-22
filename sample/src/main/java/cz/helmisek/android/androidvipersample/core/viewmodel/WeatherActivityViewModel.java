@@ -52,6 +52,8 @@ public class WeatherActivityViewModel extends ViewModel<WeatherInteractor>
 					getInteractor().setLastLocation(location);
 				}
 
+				state.set(currentWeatherEntityResponse.isSuccessful() ? StatefulLayout.State.CONTENT : StatefulLayout.State.EMPTY);
+
 				WeatherActivityViewModel.this.mPresenterViewModelContract.onWeatherInformationReady(currentWeatherEntityResponse.isSuccessful());
 			}
 		});
