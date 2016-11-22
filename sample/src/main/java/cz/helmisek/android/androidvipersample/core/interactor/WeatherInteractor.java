@@ -9,6 +9,7 @@ import cz.helmisek.android.androidvipersample.api.ApiConfig;
 import cz.helmisek.android.androidvipersample.api.WeatherAPIEndpoint;
 import cz.helmisek.android.androidvipersample.core.entity.api.CurrentWeatherEntity;
 import cz.helmisek.android.androidvipersample.core.interactor.base.RetrofitApiInteractor;
+import cz.helmisek.android.androidvipersample.core.interactor.contract.WeatherDataContract;
 import cz.helmisek.android.androidvipersample.core.interactor.datamodel.LocationDataModel;
 import cz.helmisek.android.androidvipersample.core.interactor.datamodel.WeatherDataModel;
 import okhttp3.HttpUrl;
@@ -21,7 +22,7 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 
 
-public class WeatherInteractor extends RetrofitApiInteractor implements WeatherDataModel, LocationDataModel
+public class WeatherInteractor extends RetrofitApiInteractor implements WeatherDataContract
 {
 
 	private static final String UNITS_METRIC = "metric";
