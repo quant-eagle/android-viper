@@ -8,7 +8,6 @@ import com.android.databinding.library.baseAdapters.BR;
 import cz.helmisek.android.androidviper.core.viewmodel.ViewModel;
 import cz.helmisek.android.androidvipersample.core.entity.api.CurrentWeatherEntity;
 import cz.helmisek.android.androidvipersample.core.interactor.WeatherInteractor;
-import cz.helmisek.android.androidvipersample.core.interactor.contract.WeatherDataContract;
 import cz.helmisek.android.androidvipersample.core.viewinteractor.WeatherPresenterViewModelContract;
 import cz.kinst.jakub.view.StatefulLayout;
 import retrofit2.Response;
