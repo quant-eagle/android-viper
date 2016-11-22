@@ -17,15 +17,14 @@ import cz.helmisek.android.androidviper.core.util.ViewWrapper;
  * framework. ViewModel should handle View states and prepare information for the View.
  *
  * @param <I>  Any {@link Interactor} type
- * @param <VB> Any {@link ViewDataBinding} type
  */
-public abstract class ViewModel<I extends Interactor, VB extends ViewDataBinding> extends BaseObservable implements ViewModelContract<I>, InteractorContract
+public abstract class ViewModel<I extends Interactor> extends BaseObservable implements ViewModelContract<I>, InteractorContract
 {
 
 	/**
 	 * ViewWrapper instance to provide all necessary View related objects to all of the descendants.
 	 */
-	private ViewWrapper<VB, ? extends Presenter> mWrapper;
+	private ViewWrapper<?, ? extends Presenter> mWrapper;
 
 	/**
 	 * An instance of {@link Interactor} type specific for this ViewModel instance.
@@ -38,20 +37,9 @@ public abstract class ViewModel<I extends Interactor, VB extends ViewDataBinding
 	 *
 	 * @param viewWrapper {@link ViewWrapper} initialized instance to provide object to lower levels
 	 */
-	public void bind(ViewWrapper<VB, ? extends Presenter> viewWrapper)
+	public void bind(ViewWrapper<?, ? extends Presenter> viewWrapper)
 	{
 		this.mWrapper = viewWrapper;
-	}
-
-
-	/**
-	 * Gets binding.
-	 *
-	 * @return the binding
-	 */
-	public VB getBinding()
-	{
-		return mWrapper.getBinding();
 	}
 
 
@@ -91,6 +79,7 @@ public abstract class ViewModel<I extends Interactor, VB extends ViewDataBinding
 		this.mInteractor.bind(this);
 		this.mInteractor.init();
 	}
+
 
 	@Override
 	public Resources getResources()
