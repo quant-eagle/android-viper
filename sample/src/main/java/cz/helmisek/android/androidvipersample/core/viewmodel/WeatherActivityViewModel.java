@@ -38,6 +38,9 @@ public class WeatherActivityViewModel extends ViewModel<WeatherInteractor>
 
 	public void setupWeatherInformation(final String location)
 	{
+		if(state.get() != StatefulLayout.State.PROGRESS)
+			state.set(StatefulLayout.State.PROGRESS);
+
 		getInteractor().loadCurrentWeather(location).subscribe(new Action1<Response<CurrentWeatherEntity>>()
 		{
 			@Override

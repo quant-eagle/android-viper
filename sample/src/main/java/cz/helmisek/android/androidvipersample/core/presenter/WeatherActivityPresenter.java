@@ -45,9 +45,6 @@ public class WeatherActivityPresenter extends Presenter<WeatherActivityViewModel
 
 	private void refreshWeatherData()
 	{
-		if(getViewModel().state.get() != StatefulLayout.State.PROGRESS)
-			getViewModel().state.set(StatefulLayout.State.PROGRESS);
-
 		getViewModel().setupWeatherInformation(getBinding().weatherLocation.getText().toString());
 	}
 
