@@ -8,13 +8,14 @@ import com.android.databinding.library.baseAdapters.BR;
 import cz.helmisek.android.androidviper.core.viewmodel.ViewModel;
 import cz.helmisek.android.androidvipersample.core.entity.api.CurrentWeatherEntity;
 import cz.helmisek.android.androidvipersample.core.interactor.WeatherInteractor;
+import cz.helmisek.android.androidvipersample.core.interactor.contract.WeatherActivityViewModelInteractorContract;
 import cz.helmisek.android.androidvipersample.core.viewinteractor.WeatherPresenterViewModelContract;
 import cz.kinst.jakub.view.StatefulLayout;
 import retrofit2.Response;
 import rx.functions.Action1;
 
 
-public class WeatherActivityViewModel extends ViewModel<WeatherInteractor>
+public class WeatherActivityViewModel extends ViewModel<WeatherInteractor, WeatherActivityViewModelInteractorContract>
 {
 
 	public final ObservableField<StatefulLayout.State> state = new ObservableField<>(StatefulLayout.State.CONTENT);
@@ -39,7 +40,7 @@ public class WeatherActivityViewModel extends ViewModel<WeatherInteractor>
 	public void setupWeatherInformation(final String location)
 	{
 		if(state.get() != StatefulLayout.State.PROGRESS)
-			state.set(StatefulLayout.State.PROGRESS);
+			state.set(StatefulLayout.State.CONTENT);
 
 		getInteractor().loadCurrentWeather(location).subscribe(new Action1<Response<CurrentWeatherEntity>>()
 		{
@@ -57,6 +58,8 @@ public class WeatherActivityViewModel extends ViewModel<WeatherInteractor>
 				WeatherActivityViewModel.this.mPresenterViewModelContract.onWeatherInformationReady(currentWeatherEntityResponse.isSuccessful());
 			}
 		});
+
+
 	}
 
 

@@ -3,7 +3,6 @@ package cz.helmisek.android.androidviper.core.viewmodel;
 import android.content.Context;
 import android.content.res.Resources;
 import android.databinding.BaseObservable;
-import android.databinding.ViewDataBinding;
 
 import cz.helmisek.android.androidviper.core.contract.InteractorContract;
 import cz.helmisek.android.androidviper.core.contract.ViewModelContract;
@@ -18,7 +17,7 @@ import cz.helmisek.android.androidviper.core.util.ViewWrapper;
  *
  * @param <I>  Any {@link Interactor} type
  */
-public abstract class ViewModel<I extends Interactor> extends BaseObservable implements ViewModelContract<I>, InteractorContract
+public abstract class ViewModel<I extends Interactor<IDC>, IDC> extends BaseObservable implements ViewModelContract<I>, InteractorContract
 {
 
 	/**
@@ -48,9 +47,9 @@ public abstract class ViewModel<I extends Interactor> extends BaseObservable imp
 	 *
 	 * @return {@link Interactor} type instance
 	 */
-	public I getInteractor()
+	public IDC getInteractor()
 	{
-		return this.mInteractor;
+		return this.mInteractor.getInteractorDataContract();
 	}
 
 
