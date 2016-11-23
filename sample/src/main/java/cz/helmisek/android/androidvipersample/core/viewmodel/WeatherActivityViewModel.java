@@ -8,14 +8,14 @@ import com.android.databinding.library.baseAdapters.BR;
 import cz.helmisek.android.androidviper.core.viewmodel.ViewModel;
 import cz.helmisek.android.androidvipersample.core.entity.api.CurrentWeatherEntity;
 import cz.helmisek.android.androidvipersample.core.interactor.WeatherInteractor;
-import cz.helmisek.android.androidvipersample.core.interactor.contract.WeatherActivityViewModelInteractorContract;
+import cz.helmisek.android.androidvipersample.core.interactor.contract.WeatherViewModelInteractorContract;
 import cz.helmisek.android.androidvipersample.core.viewinteractor.WeatherPresenterViewModelContract;
 import cz.kinst.jakub.view.StatefulLayout;
 import retrofit2.Response;
 import rx.functions.Action1;
 
 
-public class WeatherActivityViewModel extends ViewModel<WeatherInteractor, WeatherActivityViewModelInteractorContract>
+public class WeatherActivityViewModel extends ViewModel<WeatherInteractor, WeatherViewModelInteractorContract>
 {
 
 	public final ObservableField<StatefulLayout.State> state = new ObservableField<>(StatefulLayout.State.CONTENT);

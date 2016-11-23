@@ -5,7 +5,7 @@ import retrofit2.Response;
 import rx.Observable;
 
 
-public interface WeatherActivityViewModelInteractorContract
+public interface WeatherViewModelInteractorContract
 {
 	String PREF_KEY_LAST_WEATHER_LOCATION = "last_weather_location";
 	String DEFAULT_LAST_WEATHER_LOCATION_VALUE = "London";

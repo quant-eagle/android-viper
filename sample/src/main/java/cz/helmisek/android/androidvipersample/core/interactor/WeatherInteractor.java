@@ -6,21 +6,21 @@ import android.preference.PreferenceManager;
 
 import cz.helmisek.android.androidvipersample.api.WeatherAPIEndpoint;
 import cz.helmisek.android.androidvipersample.core.entity.api.CurrentWeatherEntity;
-import cz.helmisek.android.androidvipersample.core.interactor.contract.WeatherActivityViewModelInteractorContract;
+import cz.helmisek.android.androidvipersample.core.interactor.contract.WeatherViewModelInteractorContract;
 import retrofit2.Response;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 
 
-public class WeatherInteractor extends RetrofitApiInteractor<WeatherActivityViewModelInteractorContract>
+public class WeatherInteractor extends RetrofitApiInteractor<WeatherViewModelInteractorContract>
 {
 	private static final String UNITS_METRIC = "metric";
 
 
 	@Override
-	public WeatherActivityViewModelInteractorContract initDataContract()
+	public WeatherViewModelInteractorContract initDataContract()
 	{
-		return new WeatherActivityViewModelInteractorContract()
+		return new WeatherViewModelInteractorContract()
 		{
 			@Override
 			public String getLastLocation()
